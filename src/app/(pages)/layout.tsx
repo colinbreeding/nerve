@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import Header from "@/components/header/Header";
 import ClientOnly from "@/util/ClientOnly";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { AuthModalProvider } from "@/context/AuthModalContext";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,10 +26,12 @@ export default function RootLayout({
         className={`${font.className} -bg-white dark:-bg-smoothBlack duration-100 ease-in-out`}
       >
         <ThemeProvider>
-          <ClientOnly>
-            <Header />
-          </ClientOnly>
-          {children}
+          <AuthModalProvider>
+            <ClientOnly>
+              <Header />
+            </ClientOnly>
+            {children}
+          </AuthModalProvider>
         </ThemeProvider>
       </body>
     </html>

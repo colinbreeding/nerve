@@ -7,6 +7,7 @@ import { AiFillAliwangwang } from "react-icons/ai";
 import { BiSun, BiMoon } from "react-icons/bi";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { Theme, ThemeContext } from "@/context/ThemeContext";
+import { AuthModalContext } from "@/context/AuthModalContext";
 type ThemeOptions = {
   icon: React.JSX.Element;
   text: Theme;
@@ -31,6 +32,7 @@ export default function Header() {
   const { theme, setTheme } = useContext(ThemeContext);
   const [currTheme, setCurrTheme] = useState<ThemeOptions | null>(null);
   const [isThemeSelected, setIsThemeSelected] = useState<boolean>(false);
+  const { setIsAuthModalOpen } = useContext(AuthModalContext);
 
   useEffect(() => {
     switch (theme) {
@@ -136,7 +138,7 @@ export default function Header() {
           <div className="flex gap-2">
             <button
               onClick={() => {
-                console.log("signing in");
+                setIsAuthModalOpen(true);
               }}
               className="text-[14px] font-medium text-white -bg-steelBlue hover:-bg-lapisLazuliBlue border -border-pictonBlue hover:-border-steelBlue py-2 px-4 rounded-md transition duration-150 ease-in-out"
             >
