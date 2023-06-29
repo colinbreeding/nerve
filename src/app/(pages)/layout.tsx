@@ -1,5 +1,8 @@
 import "../../styles/globals.css";
 import { Poppins } from "next/font/google";
+import Header from "@/components/header/Header";
+import ClientOnly from "@/util/ClientOnly";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,7 +24,12 @@ export default function RootLayout({
       <body
         className={`${font.className} -bg-white dark:-bg-smoothBlack duration-100 ease-in-out`}
       >
-        {children}
+        <ThemeProvider>
+          <ClientOnly>
+            <Header />
+          </ClientOnly>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
