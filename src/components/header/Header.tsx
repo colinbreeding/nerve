@@ -66,7 +66,7 @@ export default function Header() {
               <IconContext.Provider
                 value={{
                   className:
-                    "-text-steelBlue w-7 h-7 rotate-[-20deg] group-hover:rotate-[0deg] transition duration-300 ease-in-out",
+                    "-text-steelBlue w-7 h-7 group-hover:rotate-[-20deg] transition duration-300 ease-in-out mb-[1px]",
                 }}
               >
                 <AiFillAliwangwang />
