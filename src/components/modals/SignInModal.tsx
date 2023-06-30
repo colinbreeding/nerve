@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineGoogle,
+  AiFillGithub,
+  AiOutlineGithub,
+} from "react-icons/ai";
 import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInSchema, SignInType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
+import { signIn } from "next-auth/react";
 
 type Props = {
   visible: boolean;
@@ -50,9 +56,31 @@ export default function SignInModal({ visible, onClose }: Props) {
             <p className="-text-smoothBlack dark:text-neutral-200 font-semibold text-[20px] mt-2">
               Sign In
             </p>
-            <p className="text-neutral-400 text-[14px]">
-              Enter in your credentials below
+            <p className="text-neutral-500 dark:text-neutral-400 text-[14px]">
+              Choose your preferred sign up method below
             </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => signIn("google")}
+              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
+            >
+              <AiOutlineGoogle className="w-5 h-5 mb-[1px]" />
+              Google
+            </button>
+            <button
+              onClick={() => signIn("github")}
+              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
+            >
+              <AiOutlineGithub className="w-5 h-5 mb-[1px]" />
+              Github
+            </button>
+          </div>
+          <div className="relative flex items-center justify-center my-2">
+            <p className="text-[12px] text-neutral-500 dark:text-neutral-400 bg-white dark:-bg-smoothBlack absolute p-1">
+              Or Continue With
+            </p>
+            <div className="w-full h-[1px] bg-neutral-500 dark:bg-neutral-400" />
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -62,7 +90,7 @@ export default function SignInModal({ visible, onClose }: Props) {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("email")}
               />
               {errors.email && (
@@ -75,7 +103,7 @@ export default function SignInModal({ visible, onClose }: Props) {
               <input
                 type="password"
                 placeholder="Password"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("password")}
               />
               {errors.password && (
@@ -90,7 +118,7 @@ export default function SignInModal({ visible, onClose }: Props) {
             >
               Sign In
             </button>
-            <p className="text-[12px] text-neutral-400 mt-4">
+            <p className="text-[12px] text-neutral-500 dark:text-neutral-400 mt-4">
               Don't have an account?{" "}
               <span
                 onClick={() => setIsSignUp(true)}

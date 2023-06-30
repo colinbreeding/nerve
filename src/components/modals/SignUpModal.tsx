@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineGithub,
+  AiOutlineGoogle,
+} from "react-icons/ai";
 import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema, SignUpType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type Props = {
   visible: boolean;
@@ -13,7 +19,8 @@ type Props = {
 };
 
 export default function SignUpModal({ visible, onClose }: Props) {
-  const { setIsSignUp } = useContext(AuthModalContext);
+  const router = useRouter();
+  const { setIsSignUp, setIsAuthModalOpen } = useContext(AuthModalContext);
   const {
     register,
     handleSubmit,
@@ -21,8 +28,15 @@ export default function SignUpModal({ visible, onClose }: Props) {
   } = useForm<SignUpType>({
     resolver: zodResolver(SignUpSchema),
   });
-  const onSubmit = (data: SignUpType) => {
-    console.log("submitted", data);
+  const onSubmit = async (data: SignUpType) => {
+    try {
+      const response = await axios.post("/api/register", data);
+      console.log(response);
+      setIsAuthModalOpen(false);
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -50,9 +64,25 @@ export default function SignUpModal({ visible, onClose }: Props) {
             <p className="-text-smoothBlack dark:text-neutral-200 font-semibold text-[20px] mt-2">
               Sign Up
             </p>
-            <p className="text-neutral-400 text-[14px]">
-              Enter in your credentials below
+            <p className="text-neutral-500 dark:text-neutral-400 text-[14px]">
+              Choose your preferred sign up method below
             </p>
+          </div>
+          <div className="flex gap-2">
+            <button className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out">
+              <AiOutlineGoogle className="w-5 h-5 mb-[1px]" />
+              Google
+            </button>
+            <button className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out">
+              <AiOutlineGithub className="w-5 h-5 mb-[1px]" />
+              Github
+            </button>
+          </div>
+          <div className="relative flex items-center justify-center my-2">
+            <p className="text-[12px] text-neutral-500 dark:text-neutral-400 bg-white dark:-bg-smoothBlack absolute p-1">
+              Or Continue With
+            </p>
+            <div className="w-full h-[1px] bg-neutral-500 dark:bg-neutral-600" />
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -116,7 +146,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
             >
               Sign Up
             </button>
-            <p className="text-[12px] text-neutral-400 mt-4">
+            <p className="text-[12px] text-neutral-500 dark:text-neutral-400 mt-4">
               Already have an account?{" "}
               <span
                 onClick={() => setIsSignUp(false)}
