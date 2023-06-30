@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import {
   AiOutlineClose,
   AiOutlineGoogle,
-  AiFillGithub,
   AiOutlineGithub,
 } from "react-icons/ai";
 import Image from "next/image";
