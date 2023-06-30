@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   AiOutlineClose,
   AiOutlineGoogle,
@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInSchema, SignInType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type Props = {
   visible: boolean;
@@ -18,7 +20,8 @@ type Props = {
 };
 
 export default function SignInModal({ visible, onClose }: Props) {
-  const { setIsSignUp } = useContext(AuthModalContext);
+  const router = useRouter();
+  const { setIsSignUp, setIsAuthModalOpen } = useContext(AuthModalContext);
   const {
     register,
     handleSubmit,
@@ -26,8 +29,24 @@ export default function SignInModal({ visible, onClose }: Props) {
   } = useForm<SignInType>({
     resolver: zodResolver(SignInSchema),
   });
+  const [isLoading, setIsLoading] = useState(false);
   const onSubmit = (data: SignInType) => {
-    console.log("submitted", data);
+    setIsLoading(true);
+
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+      if (callback?.ok) {
+        setIsAuthModalOpen(false);
+        toast.success("Signed In");
+        router.refresh();
+      }
+      if (callback?.error) {
+        toast.error(callback.error);
+      }
+    });
   };
 
   return (
@@ -115,7 +134,7 @@ export default function SignInModal({ visible, onClose }: Props) {
               type="submit"
               className="h-10 rounded-md -bg-steelBlue hover:-bg-pictonBlue text-white text-[14px] transition duration-150 ease-in-out"
             >
-              Sign In
+              {isLoading ? "Signing In" : "Sign In"}
             </button>
             <p className="text-[12px] text-neutral-500 dark:text-neutral-400 mt-4">
               Don't have an account?{" "}
