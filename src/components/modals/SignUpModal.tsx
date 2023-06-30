@@ -12,6 +12,7 @@ import { SignUpSchema, SignUpType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Props = {
   visible: boolean;
@@ -20,7 +21,7 @@ type Props = {
 
 export default function SignUpModal({ visible, onClose }: Props) {
   const router = useRouter();
-  const { setIsSignUp, setIsAuthModalOpen } = useContext(AuthModalContext);
+  const { setIsSignUp } = useContext(AuthModalContext);
   const {
     register,
     handleSubmit,
@@ -30,9 +31,9 @@ export default function SignUpModal({ visible, onClose }: Props) {
   });
   const onSubmit = async (data: SignUpType) => {
     try {
-      const response = await axios.post("/api/register", data);
-      console.log(response);
-      setIsAuthModalOpen(false);
+      await axios.post("/api/register", data);
+      toast.success("Account created, please sign in");
+      setIsSignUp(false);
       router.refresh();
     } catch (error) {
       console.log(error);
