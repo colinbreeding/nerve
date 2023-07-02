@@ -200,7 +200,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                 onClick={() => {
                   setIsAuthModalOpen(true);
                 }}
-                className="text-[14px] font-medium text-white -bg-steelBlue hover:-bg-lapisLazuliBlue border -border-pictonBlue hover:-border-steelBlue py-2 px-4 rounded-md transition duration-150 ease-in-out"
+                className="text-[14px] font-medium text-white -bg-steelBlue hover:-bg-pictonBlue border -border-pictonBlue py-2 px-4 rounded-md transition duration-150 ease-in-out"
               >
                 Sign In
               </button>

@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineGithub,
-  AiOutlineGoogle,
-} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
@@ -13,6 +9,8 @@ import { AuthModalContext } from "@/context/AuthModalContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
 
 type Props = {
   visible: boolean;
@@ -70,13 +68,12 @@ export default function SignUpModal({ visible, onClose }: Props) {
             </p>
           </div>
           <div className="flex gap-2">
-            <button className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out">
-              <AiOutlineGoogle className="w-5 h-5 mb-[1px]" />
-              Google
-            </button>
-            <button className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out">
-              <AiOutlineGithub className="w-5 h-5 mb-[1px]" />
-              Github
+            <button
+              onClick={() => signIn("google")}
+              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
+            >
+              <FcGoogle className="w-5 h-5 mb-[1px] mr-[3px]" />
+              Sign In With Google
             </button>
           </div>
           <div className="relative flex items-center justify-center my-2">

@@ -1,9 +1,5 @@
 import React, { useContext, useState } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineGoogle,
-  AiOutlineGithub,
-} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
@@ -13,6 +9,7 @@ import { AuthModalContext } from "@/context/AuthModalContext";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 type Props = {
   visible: boolean;
@@ -83,15 +80,8 @@ export default function SignInModal({ visible, onClose }: Props) {
               onClick={() => signIn("google")}
               className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
             >
-              <AiOutlineGoogle className="w-5 h-5 mb-[1px]" />
-              Google
-            </button>
-            <button
-              onClick={() => signIn("github")}
-              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
-            >
-              <AiOutlineGithub className="w-5 h-5 mb-[1px]" />
-              Github
+              <FcGoogle className="w-5 h-5 mb-[1px] mr-[3px]" />
+              Sign In With Google
             </button>
           </div>
           <div className="relative flex items-center justify-center my-2">
@@ -137,7 +127,7 @@ export default function SignInModal({ visible, onClose }: Props) {
               {isLoading ? "Signing In" : "Sign In"}
             </button>
             <p className="text-[12px] text-neutral-500 dark:text-neutral-400 mt-4">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <span
                 onClick={() => setIsSignUp(true)}
                 className="font-semibold hover:underline cursor-pointer -text-smoothBlack dark:text-white"
