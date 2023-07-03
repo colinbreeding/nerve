@@ -5,7 +5,7 @@ import ClientOnly from "@/util/ClientOnly";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthModalProvider } from "@/context/AuthModalContext";
 import { Toaster } from "react-hot-toast";
-import getCurrentUser from "@/app/actions/getCurrentUser";
+import getCurrentUser from "@/hooks/getCurrentUser";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
