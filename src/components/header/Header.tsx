@@ -94,6 +94,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
               type="button"
               onClick={() => {
                 setIsThemeSelected(!isThemeSelected);
+                setIsProfileSelected(false);
               }}
             >
               <IconContext.Provider
@@ -110,12 +111,12 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             </button>
           </div>
           {isThemeSelected && (
-            <div className="absolute top-10 right-[64px] flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md">
+            <div className="absolute top-10 right-[64px] px-1 flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md">
               {themeOptions?.map((o, i) => {
                 return (
                   <div
                     key={i}
-                    className="w-full h-fit flex items-center gap-2 px-2 py-1 cursor-pointer hover:-bg-darkGrey/5 hover:dark:-bg-darkGrey/10 "
+                    className="w-full h-fit flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 rounded-md"
                     onClick={() => {
                       setTheme(o.text);
                       setIsThemeSelected(false);
@@ -171,11 +172,21 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                 />
               </div>
               {isProfileSelected && (
-                <div className="absolute top-10 -left-[68px] flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md">
+                <div className="absolute top-10 -left-[138px] flex flex-col w-[220px] h-fit px-1 -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md select-none overflow-ellipsis">
+                  <div className="w-full h-full px-2">
+                    <p className="text-neutral-800 dark:text-neutral-200">
+                      {currentUser.name}
+                    </p>
+                    <p className="text-neutral-500 dark:text-neutral-400 text-[12px] overflow-ellipsis">
+                      {currentUser.email}
+                    </p>
+                  </div>
+                  <div className="h-[1px] bg-neutral-700 my-1" />
                   <div
-                    className="w-full h-fit flex items-center gap-2 px-2 py-1 cursor-pointer hover:-bg-darkGrey/5 hover:dark:-bg-darkGrey/10 -text-darkGrey hover:-text-deepRed"
+                    className="w-full h-fit flex items-center gap-2 px-4 py-1 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
                     onClick={() => {
                       setIsProfileSelected(false);
+                      setIsThemeSelected(false);
                       void signOut();
                     }}
                   >
