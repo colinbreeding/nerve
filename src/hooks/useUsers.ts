@@ -1,12 +1,8 @@
 import useSWR from "swr";
 import fetcher from "@/util/fetcher";
 
-interface UseUserProps {
-  userId?: string;
-}
-
-const useUsers = (userId: UseUserProps) => {
-  const Url = userId ? `/api/user/${userId}` : "/api/user";
+const useUsers = (userId?: string) => {
+  const Url = userId ? `/api/user?userId=${userId}` : "/api/user";
   const { data, error, isLoading, mutate } = useSWR(Url, fetcher);
   return { data, error, isLoading, mutate };
 };
