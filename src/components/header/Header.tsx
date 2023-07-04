@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { IconContext } from "react-icons";
-import { AiFillAliwangwang } from "react-icons/ai";
+import { AiFillAliwangwang, AiOutlineUser } from "react-icons/ai";
 import { BiSun, BiMoon } from "react-icons/bi";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import { Theme, ThemeContext } from "@/context/ThemeContext";
@@ -13,6 +13,7 @@ import { TfiAngleDown } from "react-icons/tfi";
 import { IoLogOutOutline } from "react-icons/io5";
 import Image from "next/image";
 import { SafeUser } from "@/util/types/SafeUser";
+import { useRouter } from "next/navigation";
 
 type ThemeOptions = {
   icon: React.JSX.Element;
@@ -39,6 +40,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
+  const router = useRouter();
   const { theme, setTheme } = useContext(ThemeContext);
   const [currTheme, setCurrTheme] = useState<ThemeOptions | null>(null);
   const [isThemeSelected, setIsThemeSelected] = useState<boolean>(false);
@@ -172,8 +174,8 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                 />
               </div>
               {isProfileSelected && (
-                <div className="absolute top-10 -left-[138px] flex flex-col w-[220px] h-fit px-1 -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md select-none overflow-ellipsis">
-                  <div className="w-full h-full px-2">
+                <div className="absolute top-10 -left-[138px] flex flex-col w-[220px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
+                  <div className="w-full h-full p-2">
                     <p className="text-neutral-800 dark:text-neutral-200">
                       {currentUser.name}
                     </p>
@@ -181,26 +183,51 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                       {currentUser.email}
                     </p>
                   </div>
-                  <div className="h-[1px] bg-neutral-700 my-1" />
-                  <div
-                    className="w-full h-fit flex items-center gap-2 px-4 py-1 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
-                    onClick={() => {
-                      setIsProfileSelected(false);
-                      setIsThemeSelected(false);
-                      void signOut();
-                    }}
-                  >
-                    <button type="button">
-                      <IconContext.Provider
-                        value={{
-                          className:
-                            "w-5 h-5 transition duration-150 ease-in-out",
-                        }}
-                      >
-                        <IoLogOutOutline />
-                      </IconContext.Provider>
-                    </button>
-                    <p className="text-[16px]">Sign Out</p>
+                  <div className="h-[1px] bg-neutral-700" />
+                  <div className="p-1">
+                    <div
+                      className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:dark:text-neutral-200 rounded-md"
+                      onClick={() => {
+                        router.push(`/profile/${currentUser.id}`);
+                        setIsProfileSelected(false);
+                      }}
+                    >
+                      <button type="button">
+                        <IconContext.Provider
+                          value={{
+                            className:
+                              "w-5 h-5 transition duration-150 ease-in-out",
+                          }}
+                        >
+                          <AiOutlineUser />
+                        </IconContext.Provider>
+                      </button>
+                      <p className="text-[16px]">Profile</p>
+                    </div>
+                  </div>
+                  <div className="h-[1px] bg-neutral-700" />
+                  <div className="p-1">
+                    <div
+                      className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
+                      onClick={() => {
+                        setIsProfileSelected(false);
+                        setIsThemeSelected(false);
+                        void signOut();
+                        router.push("/");
+                      }}
+                    >
+                      <button type="button">
+                        <IconContext.Provider
+                          value={{
+                            className:
+                              "w-5 h-5 transition duration-150 ease-in-out",
+                          }}
+                        >
+                          <IoLogOutOutline />
+                        </IconContext.Provider>
+                      </button>
+                      <p className="text-[16px]">Sign Out</p>
+                    </div>
                   </div>
                 </div>
               )}
