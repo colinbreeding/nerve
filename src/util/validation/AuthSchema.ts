@@ -10,6 +10,7 @@ export type SignInType = z.infer<typeof SignInSchema>;
 export const SignUpSchema = z
   .object({
     email: z.string().email(),
+    name: z.string().min(5),
     username: z.string().min(5).max(25),
     password: z.string().min(5).max(25),
     confirmPassword: z.string().min(5).max(25),

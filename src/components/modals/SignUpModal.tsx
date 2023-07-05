@@ -102,6 +102,19 @@ export default function SignUpModal({ visible, onClose }: Props) {
             <div className="flex flex-col">
               <input
                 type="text"
+                placeholder="Name"
+                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                {...register("name")}
+              />
+              {errors.name && (
+                <span className="text-[12px] text-red-500 mt-1">
+                  {errors.name.message}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col">
+              <input
+                type="text"
                 placeholder="Username"
                 className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("username")}
