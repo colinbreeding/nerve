@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className="w-full h-full flex justify-center px-4 pb-4">
       <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
-        <div className="w-full space-y-2">
+        <div className="w-full">
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
               return (

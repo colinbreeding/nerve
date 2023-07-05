@@ -34,19 +34,27 @@ export const Post: React.FC<PostType> = (post) => {
             className="rounded-full cursor-pointer"
           />
         </Link>
-        <Link
-          href={`/profile/${post.userId}`}
-          onClick={(e) => e.stopPropagation()}
-          className="-text-smoothBlack dark:text-white text-[14px] font-medium hover:underline"
-        >
-          {post.user.name}
-        </Link>
-        {post.user.username && (
-          <p className="text-[12px] text-neutral-400">@{post.user.username}</p>
-        )}
-        <p className="text-[12px] text-neutral-400">{createdAt}</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+          <div>
+            <Link
+              href={`/profile/${post.userId}`}
+              onClick={(e) => e.stopPropagation()}
+              className="-text-smoothBlack dark:text-white text-[14px] font-medium hover:underline"
+            >
+              {post.user.name}
+            </Link>
+          </div>
+          <div className="flex gap-2 items-center">
+            {post.user.username && (
+              <p className="text-[12px] text-neutral-400">
+                @{post.user.username}
+              </p>
+            )}
+            <p className="text-[10px] text-neutral-400">{createdAt} ago</p>
+          </div>
+        </div>
       </div>
-      <div className="w-full pl-[38px] text-[14px]">
+      <div className="w-full pl-[38px] text-[14px] mt-2 sm:mt-0">
         <p className="-text-smoothBlack dark:text-white">{post.body}</p>
       </div>
       <div className="flex items-center gap-1 pl-[34px] mt-2">
