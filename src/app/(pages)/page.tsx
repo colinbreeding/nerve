@@ -8,6 +8,7 @@ import { Spinner } from "@/components/spinner/Spinner";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import LoginWidget from "@/components/widgets/LoginWidget";
 import FollowWidget from "@/components/widgets/FollowWidget";
+import CreateAPostWidget from "@/components/widgets/CreateAPostWidget";
 
 export default function Home() {
   const { data: currentUser } = useCurrentUser();
@@ -29,6 +30,7 @@ export default function Home() {
     <div className="w-full h-full flex justify-center px-4 pb-4">
       <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
         <div className="w-full">
+          {currentUser && <CreateAPostWidget />}
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
               return (
