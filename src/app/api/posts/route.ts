@@ -47,3 +47,22 @@ export async function GET(req: NextRequest) {
     }
   }
 }
+
+export async function POST(req: NextRequest) {
+  const { body, id } = await req.json();
+  try {
+    const createdPost = await prisma.post.create({
+      data: {
+        body,
+        userId: id,
+      },
+    });
+    return NextResponse.json(createdPost, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

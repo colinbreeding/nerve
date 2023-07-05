@@ -14,6 +14,8 @@ import { IoLogOutOutline } from "react-icons/io5";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { FiBell, FiEdit } from "react-icons/fi";
+import { PostModalContext } from "@/context/PostModalContext";
 
 type ThemeOptions = {
   icon: React.JSX.Element;
@@ -39,6 +41,7 @@ const Header: React.FC = () => {
   const router = useRouter();
   const { data: currentUser } = useCurrentUser();
   const { theme, setTheme } = useContext(ThemeContext);
+  const { setIsPostModalOpen } = useContext(PostModalContext);
   const [currTheme, setCurrTheme] = useState<ThemeOptions | null>(null);
   const [isThemeSelected, setIsThemeSelected] = useState<boolean>(false);
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
@@ -144,6 +147,15 @@ const Header: React.FC = () => {
                   </div>
                 );
               })}
+            </div>
+          )}
+          {currentUser && (
+            <div className="flex items-center gap-3">
+              <FiBell className="w-5 h-5 mb-[2px] -text-steelBlue hover:-text-lapisLazuliBlue transition duration-150 ease-in-out cursor-pointer" />
+              <FiEdit
+                onClick={() => setIsPostModalOpen(true)}
+                className="w-5 h-5 mb-[2px] -text-steelBlue hover:-text-lapisLazuliBlue transition duration-150 ease-in-out cursor-pointer"
+              />
             </div>
           )}
           {currentUser ? (

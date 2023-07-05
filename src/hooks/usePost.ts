@@ -3,7 +3,7 @@ import fetcher from "@/util/fetcher";
 
 const usePost = (postId?: string) => {
   const { data, error, isLoading, mutate } = useSWR(
-    `/api/post?postId=${postId}`,
+    `/api/posts/postId?postId=${postId}`,
     fetcher
   );
 

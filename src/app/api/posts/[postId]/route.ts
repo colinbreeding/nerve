@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../prisma/client";
+import { prisma } from "../../../../../prisma/client";
 
 export async function GET(req: NextRequest) {
   const postId = req.nextUrl.searchParams.get("postId");
@@ -26,6 +26,6 @@ export async function GET(req: NextRequest) {
       );
     }
   } else {
-    return NextResponse.json({ message: "Invalid Post ID" }, { status: 400 });
+    return NextResponse.json({ message: "Invalid post ID" }, { status: 400 });
   }
 }

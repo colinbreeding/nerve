@@ -3,21 +3,42 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PostSchema } from "@/util/validation/PostSchema";
 import { PostType } from "@/util/types/PostType";
+import axios from "axios";
+import toast from "react-hot-toast";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import usePosts from "@/hooks/usePosts";
 
 export default function CreateAPostWidget() {
+  const { data: currentUser } = useCurrentUser();
+  const { mutate } = usePosts();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<PostType>({
     resolver: zodResolver(PostSchema),
   });
   const postBody = watch("body");
 
-  const onSubmit = () => {
-    console.log("submitted");
+  const onSubmit = async ({ body }: PostType) => {
+    try {
+      setIsLoading(true);
+      await axios.post("/api/posts", {
+        body,
+        id: currentUser?.id,
+      });
+      toast.success("Post Created");
+    } catch (error) {
+      console.log(error);
+      toast.error("Post Upload Failed");
+    } finally {
+      setIsLoading(false);
+      await mutate();
+      reset();
+    }
   };
 
   return (
