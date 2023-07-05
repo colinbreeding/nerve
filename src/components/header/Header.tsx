@@ -183,7 +183,7 @@ const Header: React.FC = () => {
                 />
               </div>
               {isProfileSelected && (
-                <div className="absolute top-10 -left-[138px] flex flex-col w-[220px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
+                <div className="absolute top-10 -left-[74px] flex flex-col w-[220px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
                   <div className="w-full h-full p-2">
                     <p className="text-neutral-800 dark:text-neutral-200">
                       {currentUser.name}

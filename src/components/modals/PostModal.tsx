@@ -22,6 +22,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<PostType>({
     resolver: zodResolver(PostSchema),
@@ -42,6 +43,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
     } finally {
       setIsLoading(false);
       await mutate();
+      reset();
       onClose();
     }
   };
