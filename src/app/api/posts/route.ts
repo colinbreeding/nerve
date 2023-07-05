@@ -3,6 +3,7 @@ import { prisma } from "../../../../prisma/client";
 
 export async function GET(req: NextRequest) {
   const userId = req.nextUrl.searchParams.get("userId");
+
   if (userId) {
     try {
       const userPosts = await prisma.post.findMany({
