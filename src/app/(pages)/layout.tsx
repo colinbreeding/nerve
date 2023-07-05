@@ -33,7 +33,12 @@ export default async function RootLayout({
             <ClientOnly>
               <Header currentUser={currentUser} />
             </ClientOnly>
-            <Toaster />
+            <Toaster
+              toastOptions={{
+                className:
+                  "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
+              }}
+            />
             {children}
           </AuthModalProvider>
         </ThemeProvider>
