@@ -40,7 +40,7 @@ export default function ProfileWidget() {
               )}
               <Image
                 alt="avatar"
-                src={"/images/avatar_default.png"}
+                src={profileDetails.image ?? "/images/avatar_default.png"}
                 width={80}
                 height={80}
                 className="rounded-lg shadow-lg"

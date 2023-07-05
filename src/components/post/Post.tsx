@@ -28,7 +28,7 @@ export const Post: React.FC<PostType> = (post) => {
         >
           <Image
             alt="avatar"
-            src={"/images/avatar_default.png"}
+            src={post.user.image ?? "/images/avatar_default.png"}
             height={30}
             width={30}
             className="rounded-full cursor-pointer"
