@@ -5,7 +5,7 @@ export const SignInSchema = z.object({
   password: z.string().min(5).max(25),
 });
 
-export type SignInType = z.infer<typeof SignInSchema>;
+export type SignInSchemaType = z.infer<typeof SignInSchema>;
 
 export const SignUpSchema = z
   .object({
@@ -20,4 +20,4 @@ export const SignUpSchema = z
     path: ["confirmPassword"],
   });
 
-export type SignUpType = z.infer<typeof SignUpSchema>;
+export type SignUpSchemaType = z.infer<typeof SignUpSchema>;

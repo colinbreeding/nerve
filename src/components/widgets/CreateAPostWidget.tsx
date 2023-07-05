@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PostSchema } from "@/util/validation/PostSchema";
-import { PostType } from "@/util/types/PostType";
+import { PostSchema, PostSchemaType } from "@/util/validation/PostSchema";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useCurrentUser from "@/hooks/useCurrentUser";
@@ -18,12 +17,12 @@ export default function CreateAPostWidget() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<PostType>({
+  } = useForm<PostSchemaType>({
     resolver: zodResolver(PostSchema),
   });
   const postBody = watch("body");
 
-  const onSubmit = async ({ body }: PostType) => {
+  const onSubmit = async ({ body }: PostSchemaType) => {
     try {
       setIsLoading(true);
       await axios.post("/api/posts", {

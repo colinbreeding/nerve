@@ -4,9 +4,8 @@ import toast from "react-hot-toast";
 import usePosts from "@/hooks/usePosts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PostType } from "@/util/types/PostType";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { PostSchema } from "@/util/validation/PostSchema";
+import { PostSchema, PostSchemaType } from "@/util/validation/PostSchema";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface Props {
@@ -24,12 +23,12 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
     watch,
     reset,
     formState: { errors },
-  } = useForm<PostType>({
+  } = useForm<PostSchemaType>({
     resolver: zodResolver(PostSchema),
   });
   const post = watch("body");
 
-  const onSubmit = async ({ body }: PostType) => {
+  const onSubmit = async ({ body }: PostSchemaType) => {
     try {
       setIsLoading(true);
       await axios.post("/api/posts", {

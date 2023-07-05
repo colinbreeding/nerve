@@ -4,7 +4,7 @@ import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpSchema, SignUpType } from "@/util/validation/AuthSchema";
+import { SignUpSchema, SignUpSchemaType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -24,10 +24,10 @@ export default function SignUpModal({ visible, onClose }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpType>({
+  } = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
   });
-  const onSubmit = async (data: SignUpType) => {
+  const onSubmit = async (data: SignUpSchemaType) => {
     try {
       await axios.post("/api/register", data);
       toast.success("Account created, please sign in");

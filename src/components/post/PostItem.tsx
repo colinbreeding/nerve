@@ -5,7 +5,10 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CommentSchema, CommentType } from "@/util/validation/CommentSchema";
+import {
+  CommentSchema,
+  CommentSchemaType,
+} from "@/util/validation/CommentSchema";
 import { PostType } from "@/util/types/PostType";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,7 +19,7 @@ export const PostItem: React.FC<PostType> = (post) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<CommentType>({
+  } = useForm<CommentSchemaType>({
     resolver: zodResolver(CommentSchema),
   });
   const comment = watch("body");

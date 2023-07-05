@@ -4,7 +4,7 @@ import Image from "next/image";
 import NerveLogo from "../../../public/images/nervy-192x192.png";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignInSchema, SignInType } from "@/util/validation/AuthSchema";
+import { SignInSchema, SignInSchemaType } from "@/util/validation/AuthSchema";
 import { AuthModalContext } from "@/context/AuthModalContext";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
@@ -23,11 +23,11 @@ export default function SignInModal({ visible, onClose }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInType>({
+  } = useForm<SignInSchemaType>({
     resolver: zodResolver(SignInSchema),
   });
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = (data: SignInType) => {
+  const onSubmit = (data: SignInSchemaType) => {
     setIsLoading(true);
 
     signIn("credentials", {

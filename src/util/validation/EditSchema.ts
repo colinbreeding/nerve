@@ -7,4 +7,4 @@ export const EditSchema = z.object({
   image: z.string().optional(),
 });
 
-export type EditType = z.infer<typeof EditSchema>;
+export type EditSchemaType = z.infer<typeof EditSchema>;
