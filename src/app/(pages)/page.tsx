@@ -5,8 +5,12 @@ import usePosts from "@/hooks/usePosts";
 import { useEffect, useState } from "react";
 import { PostType } from "@/util/types/PostType";
 import { Spinner } from "@/components/spinner/Spinner";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import LoginWidget from "@/components/widgets/LoginWidget";
+import FollowWidget from "@/components/widgets/FollowWidget";
 
 export default function Home() {
+  const { data: currentUser } = useCurrentUser();
   const [posts, setPosts] = useState<PostType[] | null>(null);
   const { data, isLoading } = usePosts();
 
@@ -39,6 +43,15 @@ export default function Home() {
                 No posts to display.
               </p>
             </div>
+          )}
+        </div>
+        <div className="w-full hidden md:flex justify-end max-w-[360px]">
+          {currentUser ? (
+            <div className="w-full flex flex-col gap-4">
+              <FollowWidget />
+            </div>
+          ) : (
+            <LoginWidget />
           )}
         </div>
       </div>
