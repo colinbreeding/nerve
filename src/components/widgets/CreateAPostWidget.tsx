@@ -50,7 +50,7 @@ export default function CreateAPostWidget() {
                     : "text-neutral-400 dark:text-neutral-500"
                 }`}
               >
-                {postBody?.length}/300
+                {postBody?.length ?? 0}/300
               </p>
             </div>
             <div className="w-full flex justify-end">
