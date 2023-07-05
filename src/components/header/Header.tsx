@@ -180,7 +180,7 @@ const Header: React.FC = () => {
                       {currentUser.email}
                     </p>
                   </div>
-                  <div className="h-[1px] bg-neutral-700" />
+                  <div className="h-[1px] bg-neutral-200 dark:bg-neutral-700" />
                   <div className="p-1">
                     <div
                       className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:dark:text-neutral-200 rounded-md"
@@ -202,7 +202,7 @@ const Header: React.FC = () => {
                       <p className="text-[16px]">Profile</p>
                     </div>
                   </div>
-                  <div className="h-[1px] bg-neutral-700" />
+                  <div className="h-[1px] bg-neutral-200 dark:bg-neutral-700" />
                   <div className="p-1">
                     <div
                       className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
