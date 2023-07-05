@@ -42,3 +42,27 @@ export async function GET(req: NextRequest) {
     }
   }
 }
+
+export async function PATCH(req: NextRequest) {
+  const { id, name, image, username, bio } = await req.json();
+  try {
+    const updatedUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        username,
+        bio,
+        image,
+      },
+    });
+    return NextResponse.json(updatedUser, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}

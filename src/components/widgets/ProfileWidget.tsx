@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import { RxCalendar } from "react-icons/rx";
@@ -7,11 +7,13 @@ import { useParams } from "next/navigation";
 import useUsers from "@/hooks/useUsers";
 import { UserType } from "@/util/types/UserType";
 import useCurrentUsers from "@/hooks/useCurrentUser";
+import { EditModalContext } from "@/context/EditModalContext";
 
 export default function ProfileWidget() {
   const { data: currentUser } = useCurrentUsers();
   const { userId } = useParams();
   const { data, isLoading } = useUsers(userId);
+  const { setIsEditModalOpen } = useContext(EditModalContext);
   const [profileDetails, setProfileDetails] = useState<UserType | undefined>();
 
   useEffect(() => {
@@ -32,8 +34,11 @@ export default function ProfileWidget() {
           <div className="w-full h-full py-8 px-6 flex flex-col gap-4 relative">
             <div className="flex flex-col relative">
               {userId === currentUser?.id ? (
-                <button className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out">
-                  Edit
+                <button
+                  onClick={() => setIsEditModalOpen(true)}
+                  className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out"
+                >
+                  Edit Profile
                 </button>
               ) : (
                 <button className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out">

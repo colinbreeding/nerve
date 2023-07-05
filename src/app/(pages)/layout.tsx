@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthModalProvider } from "@/context/AuthModalContext";
 import { Toaster } from "react-hot-toast";
 import { ReactNode } from "react";
+import { EditModalProvider } from "@/context/EditModalContext";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -29,16 +30,18 @@ export default async function RootLayout({
       >
         <ThemeProvider>
           <AuthModalProvider>
-            <ClientOnly>
-              <Header />
-            </ClientOnly>
-            <Toaster
-              toastOptions={{
-                className:
-                  "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
-              }}
-            />
-            {children}
+            <EditModalProvider>
+              <ClientOnly>
+                <Header />
+              </ClientOnly>
+              <Toaster
+                toastOptions={{
+                  className:
+                    "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
+                }}
+              />
+              {children}
+            </EditModalProvider>
           </AuthModalProvider>
         </ThemeProvider>
       </body>
