@@ -12,8 +12,8 @@ import { signOut } from "next-auth/react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { IoLogOutOutline } from "react-icons/io5";
 import Image from "next/image";
-import { SafeUser } from "@/util/types/SafeUser";
 import { useRouter } from "next/navigation";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 type ThemeOptions = {
   icon: React.JSX.Element;
@@ -35,12 +35,9 @@ const themeOptions: ThemeOptions[] = [
   },
 ];
 
-interface HeaderProps {
-  currentUser?: SafeUser | null;
-}
-
-const Header: React.FC<HeaderProps> = ({ currentUser }) => {
+const Header: React.FC = () => {
   const router = useRouter();
+  const { data: currentUser } = useCurrentUser();
   const { theme, setTheme } = useContext(ThemeContext);
   const [currTheme, setCurrTheme] = useState<ThemeOptions | null>(null);
   const [isThemeSelected, setIsThemeSelected] = useState<boolean>(false);

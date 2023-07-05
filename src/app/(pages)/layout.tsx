@@ -5,7 +5,7 @@ import ClientOnly from "@/util/ClientOnly";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthModalProvider } from "@/context/AuthModalContext";
 import { Toaster } from "react-hot-toast";
-import useCurrentUser from "@/hooks/useCurrentUser";
+import { ReactNode } from "react";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -20,9 +20,8 @@ export const metadata = {
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  const currentUser = await useCurrentUser();
   return (
     <html lang="en">
       <body
@@ -31,7 +30,7 @@ export default async function RootLayout({
         <ThemeProvider>
           <AuthModalProvider>
             <ClientOnly>
-              <Header currentUser={currentUser} />
+              <Header />
             </ClientOnly>
             <Toaster
               toastOptions={{

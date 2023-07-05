@@ -6,8 +6,10 @@ import { Spinner } from "@/components/spinner/Spinner";
 import { useParams } from "next/navigation";
 import useUsers from "@/hooks/useUsers";
 import { UserType } from "@/util/types/UserType";
+import useCurrentUsers from "@/hooks/useCurrentUser";
 
 export default function ProfileWidget() {
+  const { data: currentUser } = useCurrentUsers();
   const { userId } = useParams();
   const { data, isLoading } = useUsers(userId);
   const [profileDetails, setProfileDetails] = useState<UserType | undefined>();
@@ -29,7 +31,7 @@ export default function ProfileWidget() {
           <div className="w-full h-[90px] bg-neutral-200 dark:bg-neutral-900 absolute top-0 rounded-t-lg" />
           <div className="w-full h-full py-8 px-6 flex flex-col gap-4 relative">
             <div className="flex flex-col relative">
-              {userId ? (
+              {userId === currentUser?.id ? (
                 <button className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out">
                   Edit
                 </button>
