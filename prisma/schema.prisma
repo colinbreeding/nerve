@@ -89,12 +89,12 @@ model Notification {
 }
 
 model Follower {
-  id          String @id @default(cuid())
-  user        User   @relation(fields: [followingId], references: [id], onDelete: Cascade)
-  followingId String
-  followerId  String
+  id         String @id @default(cuid())
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  followerId String
 
-  @@index([followingId])
+  @@index([userId])
 }
 
 model Like {
