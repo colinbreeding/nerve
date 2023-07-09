@@ -6,15 +6,17 @@ import { Spinner } from "@/components/spinner/Spinner";
 import { useParams } from "next/navigation";
 import useUsers from "@/hooks/useUsers";
 import { UserType } from "@/util/types/UserType";
-import useCurrentUsers from "@/hooks/useCurrentUser";
 import { EditModalContext } from "@/context/EditModalContext";
+import useFollow from "@/hooks/useFollow";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 export default function ProfileWidget() {
-  const { data: currentUser } = useCurrentUsers();
+  const { data: currentUser } = useCurrentUser();
   const { userId } = useParams();
   const { data, isLoading } = useUsers(userId);
   const { setIsEditModalOpen } = useContext(EditModalContext);
   const [profileDetails, setProfileDetails] = useState<UserType | undefined>();
+  const { data: followers, isFollowing, toggleFollow } = useFollow(userId);
 
   useEffect(() => {
     if (!data) return;
@@ -30,7 +32,7 @@ export default function ProfileWidget() {
         </div>
       ) : (
         <>
-          <div className="w-full h-[90px] bg-neutral-200 dark:bg-neutral-900 absolute top-0 rounded-t-lg" />
+          <div className="w-full h-[90px] bg-neutral-200 dark:bg-neutral-800 absolute top-0 rounded-t-lg" />
           <div className="w-full h-full py-8 px-6 flex flex-col gap-4 relative">
             <div className="flex flex-col relative">
               {userId === currentUser?.id ? (
@@ -41,8 +43,11 @@ export default function ProfileWidget() {
                   Edit Profile
                 </button>
               ) : (
-                <button className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out">
-                  Follow
+                <button
+                  onClick={toggleFollow}
+                  className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out"
+                >
+                  {isFollowing ? "Unfollow" : "Follow"}
                 </button>
               )}
               <Image
@@ -66,7 +71,7 @@ export default function ProfileWidget() {
               <p className="text-[12px] text-neutral-400 mt-1">
                 {profileDetails.email}
               </p>
-              <p className="text-sm -text-smoothBlack dark:text-neutral-200 leading-4 mt-4">
+              <p className="text-sm -text-smoothBlack dark:text-neutral-200 leading-5 mt-4">
                 {profileDetails.bio && profileDetails.bio}
               </p>
               {profileDetails.createdAt && (
@@ -80,15 +85,23 @@ export default function ProfileWidget() {
               )}
               <div className="flex gap-2 mt-2 items-center">
                 <p className="text-sm text-neutral-500">
-                  <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
+                  {followers ? (
+                    <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
+                      {followers.Following.length}{" "}
+                    </span>
+                  ) : (
                     0
-                  </span>{" "}
+                  )}
                   Following
                 </p>
                 <p className="text-sm text-neutral-500">
-                  <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
+                  {followers ? (
+                    <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
+                      {followers.Followers.length}{" "}
+                    </span>
+                  ) : (
                     0
-                  </span>{" "}
+                  )}
                   Followers
                 </p>
               </div>
