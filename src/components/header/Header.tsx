@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { FiBell, FiEdit } from "react-icons/fi";
 import { PostModalContext } from "@/context/PostModalContext";
+import NotificationFeed from "@/components/notification/NotificationFeed";
 
 type ThemeOptions = {
   icon: React.JSX.Element;
@@ -45,7 +46,9 @@ const Header: React.FC = () => {
   const [currTheme, setCurrTheme] = useState<ThemeOptions | null>(null);
   const [isThemeSelected, setIsThemeSelected] = useState<boolean>(false);
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
-  const [isProfileSelected, setIsProfileSelected] = useState(false);
+  const [isProfileSelected, setIsProfileSelected] = useState<boolean>(false);
+  const [isNotificationSelected, setIsNotificationSelected] =
+    useState<boolean>(false);
 
   useEffect(() => {
     switch (theme) {
@@ -97,6 +100,7 @@ const Header: React.FC = () => {
               onClick={() => {
                 setIsThemeSelected(!isThemeSelected);
                 setIsProfileSelected(false);
+                setIsNotificationSelected(false);
               }}
             >
               <IconContext.Provider
@@ -113,7 +117,11 @@ const Header: React.FC = () => {
             </button>
           </div>
           {isThemeSelected && (
-            <div className="absolute top-10 right-[64px] px-1 flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md">
+            <div
+              className={`${
+                currentUser ? "right-[124px]" : "right-[64px]"
+              } absolute top-10 px-1 flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md`}
+            >
               {themeOptions?.map((o, i) => {
                 return (
                   <div
@@ -151,11 +159,33 @@ const Header: React.FC = () => {
           )}
           {currentUser && (
             <div className="flex items-center gap-3">
-              <FiBell className="w-5 h-5 mb-[2px] -text-steelBlue hover:-text-lapisLazuliBlue transition duration-150 ease-in-out cursor-pointer" />
+              <div
+                onClick={() => {
+                  setIsNotificationSelected(!isNotificationSelected);
+                  setIsThemeSelected(false);
+                  setIsProfileSelected(false);
+                }}
+                className="relative"
+              >
+                {currentUser.hasNotification && (
+                  <div className="-bg-pictonBlue w-2 h-2 rounded-full absolute left-[10px] shadow-sm -shadow-steelBlue" />
+                )}
+                <FiBell className="w-5 h-5 mb-[2px] -text-steelBlue hover:-text-lapisLazuliBlue transition duration-150 ease-in-out cursor-pointer" />
+              </div>
               <FiEdit
-                onClick={() => setIsPostModalOpen(true)}
+                onClick={() => {
+                  setIsPostModalOpen(true);
+                  setIsNotificationSelected(false);
+                  setIsProfileSelected(false);
+                  setIsThemeSelected(false);
+                }}
                 className="w-5 h-5 mb-[2px] -text-steelBlue hover:-text-lapisLazuliBlue transition duration-150 ease-in-out cursor-pointer"
               />
+            </div>
+          )}
+          {isNotificationSelected && (
+            <div className="absolute top-10 right-[90px] flex flex-col w-[350px] h-[400px] -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll">
+              <NotificationFeed userId={currentUser?.id} />
             </div>
           )}
           {currentUser ? (
@@ -165,6 +195,7 @@ const Header: React.FC = () => {
                 onClick={() => {
                   setIsProfileSelected(!isProfileSelected);
                   setIsThemeSelected(false);
+                  setIsNotificationSelected(false);
                 }}
               >
                 <Image
@@ -184,7 +215,7 @@ const Header: React.FC = () => {
               </div>
               {isProfileSelected && (
                 <div className="absolute top-10 -left-[74px] flex flex-col w-[220px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
-                  <div className="w-full h-full p-2">
+                  <div className="w-full h-full py-2 px-4">
                     <p className="text-neutral-800 dark:text-neutral-200">
                       {currentUser.name}
                     </p>
@@ -221,6 +252,7 @@ const Header: React.FC = () => {
                       onClick={() => {
                         setIsProfileSelected(false);
                         setIsThemeSelected(false);
+                        setIsNotificationSelected(false);
                         void signOut();
                         router.push("/");
                       }}

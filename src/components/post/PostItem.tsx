@@ -30,7 +30,7 @@ export const PostItem: React.FC<PostType> = (post) => {
     resolver: zodResolver(CommentSchema),
   });
   const comment = watch("body");
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { mutate: mutatePost } = usePost(post.id);
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const { data: likes, hasLiked, toggleLike } = useLike(post.id);
@@ -51,6 +51,7 @@ export const PostItem: React.FC<PostType> = (post) => {
     } finally {
       setIsLoading(false);
       await mutatePost();
+      await mutateCurrentUser();
       reset();
     }
   };

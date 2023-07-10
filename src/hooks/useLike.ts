@@ -10,7 +10,7 @@ const useLike = (postId: string) => {
     `/api/like?postId=${postId}`,
     fetcher
   );
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
 
@@ -47,6 +47,7 @@ const useLike = (postId: string) => {
     }
     await request();
     await mutate();
+    await mutateCurrentUser();
   };
 
   return {

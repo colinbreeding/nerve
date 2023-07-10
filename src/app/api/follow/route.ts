@@ -48,6 +48,28 @@ export async function POST(req: NextRequest) {
         followerId: currentUserId,
       },
     });
+    try {
+      await prisma.notification.create({
+        data: {
+          body: "Someone just followed you!",
+          userId: userId,
+        },
+      });
+      await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          hasNotification: true,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return NextResponse.json(
+        { error: "Notification Update Failed" },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(addFollow, { status: 200 });
   } catch (error) {
     console.log(error);

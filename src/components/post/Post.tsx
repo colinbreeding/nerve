@@ -61,7 +61,7 @@ export const Post: React.FC<PostType> = (post) => {
       </div>
       <div className="flex items-center gap-1 pl-[34px] mt-2">
         <div
-          onClick={(e) => {
+          onClick={async (e) => {
             e.stopPropagation();
             void toggleLike();
           }}

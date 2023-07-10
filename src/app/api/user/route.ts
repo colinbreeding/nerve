@@ -10,13 +10,6 @@ export async function GET(req: NextRequest) {
           id: userId,
         },
       });
-      // const followersCount = await prisma.user.count({
-      //   where: {
-      //     followingIds: {
-      //       has: userId,
-      //     },
-      //   },
-      // });
       return NextResponse.json(user, { status: 200 });
     } catch (error) {
       console.log(error);
