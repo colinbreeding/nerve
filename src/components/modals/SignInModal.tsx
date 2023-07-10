@@ -10,6 +10,7 @@ import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { Spinner } from "@/components/spinner/Spinner";
 
 type Props = {
   visible: boolean;
@@ -124,7 +125,13 @@ export default function SignInModal({ visible, onClose }: Props) {
               type="submit"
               className="h-10 rounded-md -bg-steelBlue hover:-bg-pictonBlue text-white text-[14px] transition duration-150 ease-in-out"
             >
-              {isLoading ? "Signing In" : "Sign In"}
+              {isLoading ? (
+                <p className="w-full h-full flex justify-center items-center">
+                  <Spinner width="w-5" height="h-5" fill="fill-white" />
+                </p>
+              ) : (
+                "Sign In"
+              )}
             </button>
             <p className="text-[12px] text-neutral-500 dark:text-neutral-400 mt-4">
               Don&apos;t have an account?{" "}
