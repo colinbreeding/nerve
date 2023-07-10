@@ -38,7 +38,7 @@ export default function SignInModal({ visible, onClose }: Props) {
       if (callback?.ok) {
         setIsAuthModalOpen(false);
         toast.success("Signed In");
-        router.refresh();
+        router.push("/");
       }
       if (callback?.error) {
         toast.error(callback.error);
