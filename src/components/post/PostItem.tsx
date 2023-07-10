@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import usePost from "@/hooks/usePost";
 import { AuthModalContext } from "@/context/AuthModalContext";
+import { Spinner } from "@/components/spinner/Spinner";
 
 export const PostItem: React.FC<PostType> = (post) => {
   const {
@@ -144,9 +145,15 @@ export const PostItem: React.FC<PostType> = (post) => {
             <button
               type="submit"
               disabled={comment?.length === 0}
-              className="w-full sm:w-32 text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md mt-2 text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
+              className="w-full sm:w-32 h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md mt-2 text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
             >
-              {isLoading ? "Commenting" : "Comment"}
+              {isLoading ? (
+                <p className="w-full h-full flex justify-center items-center">
+                  <Spinner width="w-5" height="h-5" fill="fill-white" />
+                </p>
+              ) : (
+                "Comment"
+              )}
             </button>
           </div>
         </form>

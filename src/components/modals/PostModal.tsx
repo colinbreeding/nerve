@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { PostSchema, PostSchemaType } from "@/util/validation/PostSchema";
 import { AiOutlineClose } from "react-icons/ai";
+import { Spinner } from "@/components/spinner/Spinner";
 
 interface Props {
   visible: boolean;
@@ -83,9 +84,15 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
               </div>
               <button
                 type="submit"
-                className="w-full text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
+                className="w-full h-[40px] text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
               >
-                {isLoading ? "Posting..." : "Post"}
+                {isLoading ? (
+                  <p className="w-full h-full flex justify-center items-center">
+                    <Spinner width="w-5" height="h-5" fill="fill-white" />
+                  </p>
+                ) : (
+                  "Post"
+                )}
               </button>
             </form>
           </div>

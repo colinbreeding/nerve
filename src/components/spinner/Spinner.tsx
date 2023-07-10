@@ -1,11 +1,19 @@
 import React from "react";
 
-export const Spinner: React.FC = () => {
+interface SpinnerProps {
+  width?: string;
+  height?: string;
+  fill?: string;
+}
+
+export const Spinner: React.FC<SpinnerProps> = ({ width, height, fill }) => {
   return (
     <div role="status">
       <svg
         aria-hidden="true"
-        className="w-7 h-7 mr-2 text-gray-200 animate-spin dark:text-gray-600 -fill-steelBlue"
+        className={`${width ? width : "w-7"} ${height ? height : "h-7"} ${
+          fill ? fill : " -fill-steelBlue"
+        } text-gray-200 animate-spin dark:text-gray-600`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
