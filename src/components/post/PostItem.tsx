@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import {
 import { PostType } from "@/util/types/PostType";
 import Link from "next/link";
 import Image from "next/image";
+import useLike from "@/hooks/useLike";
 
 export const PostItem: React.FC<PostType> = (post) => {
   const {
@@ -23,6 +24,7 @@ export const PostItem: React.FC<PostType> = (post) => {
     resolver: zodResolver(CommentSchema),
   });
   const comment = watch("body");
+  const { data: likes, hasLiked, toggleLike } = useLike(post.id);
 
   const onSubmit = () => {
     console.log("submitted");
@@ -58,9 +60,21 @@ export const PostItem: React.FC<PostType> = (post) => {
           <p className="-text-smoothBlack dark:text-white">{post.body}</p>
         </div>
         <div className="flex items-center gap-1 pl-[34px] mt-2">
-          <div className="flex items-center gap-1 text-neutral-400 hover:text-red-500 p-1 rounded-sm cursor-pointer">
-            <AiOutlineHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
-            <p className="text-[12px]">0</p>
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              void toggleLike();
+            }}
+            className={`${
+              hasLiked ? "text-red-500" : "text-neutral-400 hover:text-red-500"
+            } flex items-center gap-1 p-1 rounded-sm cursor-pointer`}
+          >
+            {hasLiked ? (
+              <AiFillHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
+            ) : (
+              <AiOutlineHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
+            )}
+            <p className="text-[12px]">{likes ? likes.length : 0}</p>
           </div>
           <div className="flex items-center gap-1 text-neutral-400 p-1 rounded-sm">
             <FiMessageSquare className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />

@@ -2,12 +2,13 @@
 
 import React, { useMemo } from "react";
 import Image from "next/image";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { formatDistanceToNowStrict } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/util/types/PostType";
+import useLike from "@/hooks/useLike";
 
 export const Post: React.FC<PostType> = (post) => {
   const router = useRouter();
@@ -15,7 +16,7 @@ export const Post: React.FC<PostType> = (post) => {
     if (!post.createdAt) return null;
     return formatDistanceToNowStrict(new Date(post.createdAt));
   }, [post.createdAt]);
-
+  const { data: likes, hasLiked, toggleLike } = useLike(post.id);
   return (
     <div
       onClick={() => router.push(`/post/${post.id}`)}
@@ -58,9 +59,21 @@ export const Post: React.FC<PostType> = (post) => {
         <p className="-text-smoothBlack dark:text-white">{post.body}</p>
       </div>
       <div className="flex items-center gap-1 pl-[34px] mt-2">
-        <div className="flex items-center gap-1 text-neutral-400 hover:text-red-500 p-1 rounded-sm cursor-pointer">
-          <AiOutlineHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
-          <p className="text-[12px]">0</p>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            void toggleLike();
+          }}
+          className={`${
+            hasLiked ? "text-red-500" : "text-neutral-400 hover:text-red-500"
+          } flex items-center gap-1 p-1 rounded-sm cursor-pointer`}
+        >
+          {hasLiked ? (
+            <AiFillHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
+          ) : (
+            <AiOutlineHeart className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
+          )}
+          <p className="text-[12px]">{likes ? likes.length : 0}</p>
         </div>
         <div className="flex items-center gap-1 text-neutral-400 hover:text-neutral-200 p-1 rounded-sm cursor-pointer">
           <FiMessageSquare className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />

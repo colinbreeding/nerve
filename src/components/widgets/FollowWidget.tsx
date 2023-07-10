@@ -9,7 +9,9 @@ export default function FollowWidget() {
   const { data: currentUser } = useCurrentUser();
   const [randomInt, setRandomInt] = useState<number>(0);
   const filteredUsers =
-    users && users.filter((u: UserType) => u.id !== currentUser.id);
+    users &&
+    currentUser &&
+    users.filter((u: UserType) => u.id !== currentUser.id);
 
   const getRandomUsers = useCallback(() => {
     if (filteredUsers) {
@@ -29,10 +31,15 @@ export default function FollowWidget() {
         </h1>
       </div>
       <div className="w-full px-6 flex flex-col gap-3">
-        {filteredUsers &&
-          filteredUsers
-            .slice(randomInt, randomInt + 3)
-            .map((d: any, i: number) => {
+        {currentUser
+          ? filteredUsers &&
+            filteredUsers
+              .slice(randomInt, randomInt + 3)
+              .map((d: any, i: number) => {
+                return <UserItem key={i} user={d} />;
+              })
+          : users &&
+            users.slice(randomInt, randomInt + 3).map((d: any, i: number) => {
               return <UserItem key={i} user={d} />;
             })}
       </div>
