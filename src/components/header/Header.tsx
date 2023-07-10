@@ -184,7 +184,7 @@ const Header: React.FC = () => {
             </div>
           )}
           {isNotificationSelected && (
-            <div className="absolute top-10 right-[90px] flex flex-col w-[350px] h-[400px] -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll">
+            <div className="absolute top-10 right-[90px] flex flex-col w-[350px] h-[410px] -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll">
               <NotificationFeed userId={currentUser?.id} />
             </div>
           )}
