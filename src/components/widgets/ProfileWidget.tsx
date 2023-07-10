@@ -76,15 +76,15 @@ export default function ProfileWidget() {
               </p>
               {profileDetails.createdAt && (
                 <div className="flex items-center mt-4 gap-1">
-                  <RxCalendar className="w-4 h-4 mb-1 text-neutral-500" />
-                  <p className="text-xs text-neutral-500">
+                  <RxCalendar className="w-4 h-4 mb-1 text-neutral-400" />
+                  <p className="text-xs text-neutral-400">
                     Joined{" "}
                     {format(new Date(profileDetails.createdAt), "MMMM yyyy")}
                   </p>
                 </div>
               )}
               <div className="flex gap-2 mt-2 items-center">
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-neutral-400">
                   {followers ? (
                     <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
                       {followers.Following.length}{" "}
@@ -94,7 +94,7 @@ export default function ProfileWidget() {
                   )}
                   Following
                 </p>
-                <p className="text-sm text-neutral-500">
+                <p className="text-sm text-neutral-400">
                   {followers ? (
                     <span className="-text-smoothBlack dark:text-neutral-200 font-semibold">
                       {followers.Followers.length}{" "}
