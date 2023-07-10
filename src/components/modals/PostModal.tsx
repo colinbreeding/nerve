@@ -35,7 +35,6 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
         body,
         id: currentUser?.id,
       });
-      toast.success("Post Created");
     } catch (error) {
       console.log(error);
       toast.error("Post Upload Failed");

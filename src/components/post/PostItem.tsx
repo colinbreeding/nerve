@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { useForm } from "react-hook-form";
@@ -13,21 +13,46 @@ import { PostType } from "@/util/types/PostType";
 import Link from "next/link";
 import Image from "next/image";
 import useLike from "@/hooks/useLike";
+import axios from "axios";
+import toast from "react-hot-toast";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import usePost from "@/hooks/usePost";
+import { AuthModalContext } from "@/context/AuthModalContext";
 
 export const PostItem: React.FC<PostType> = (post) => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<CommentSchemaType>({
     resolver: zodResolver(CommentSchema),
   });
   const comment = watch("body");
+  const { data: currentUser } = useCurrentUser();
+  const { mutate: mutatePost } = usePost(post.id);
+  const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const { data: likes, hasLiked, toggleLike } = useLike(post.id);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSubmit = () => {
-    console.log("submitted");
+  const onSubmit = async ({ body }: CommentSchemaType) => {
+    if (!currentUser) return setIsAuthModalOpen(true);
+    try {
+      setIsLoading(true);
+      await axios.post("/api/comment", {
+        commentBody: body,
+        userId: currentUser?.id,
+        postId: post.id,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error("Comment Upload Failed");
+    } finally {
+      setIsLoading(false);
+      await mutatePost();
+      reset();
+    }
   };
 
   return (
@@ -78,7 +103,9 @@ export const PostItem: React.FC<PostType> = (post) => {
           </div>
           <div className="flex items-center gap-1 text-neutral-400 p-1 rounded-sm">
             <FiMessageSquare className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
-            <p className="text-[12px]">0</p>
+            <p className="text-[12px]">
+              {post && post.comments ? post.comments.length : 0}
+            </p>
           </div>
         </div>
       </div>
@@ -118,7 +145,7 @@ export const PostItem: React.FC<PostType> = (post) => {
               disabled={comment?.length === 0}
               className="w-full sm:w-32 text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md mt-2 text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
             >
-              Comment
+              {isLoading ? "Commenting" : "Comment"}
             </button>
           </div>
         </form>

@@ -6,6 +6,8 @@ import React from "react";
 import { PostItem } from "@/components/post/PostItem";
 import FollowWidget from "@/components/widgets/FollowWidget";
 import usePost from "@/hooks/usePost";
+import { Comment } from "@/components/comment/Comment";
+import { CommentType } from "@/util/types/CommentType";
 
 const PostView = () => {
   const { postId } = useParams();
@@ -17,11 +19,19 @@ const PostView = () => {
         <Spinner />
       </div>
     );
+
   return (
     <div className="w-full h-full flex justify-center px-4 pb-4">
       <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
-        <div className="w-full space-y-2">
-          <PostItem {...post} />
+        <div className="flex flex-col w-full">
+          <div className="w-full space-y-2">
+            <PostItem {...post} />
+          </div>
+          <div>
+            {post.comments.map((p: CommentType, i: number) => {
+              return <Comment key={i} {...p} />;
+            })}
+          </div>
         </div>
         <div className="w-full hidden md:flex justify-end max-w-[360px]">
           <div className="w-full flex flex-col gap-4">

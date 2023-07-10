@@ -11,7 +11,11 @@ export async function GET(req: NextRequest) {
         },
         include: {
           user: true,
-          comments: true,
+          comments: {
+            orderBy: {
+              createdAt: "desc",
+            },
+          },
         },
         orderBy: {
           createdAt: "desc",

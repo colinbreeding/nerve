@@ -8,12 +8,12 @@ export async function GET(req: NextRequest) {
     if (!postId) {
       return NextResponse.json({ error: "Unknown Post ID" }, { status: 400 });
     }
-    const getLikes = await prisma.like.findMany({
+    const likes = await prisma.like.findMany({
       where: {
         postId: postId,
       },
     });
-    return NextResponse.json(getLikes, { status: 200 });
+    return NextResponse.json(likes, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

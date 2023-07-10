@@ -17,6 +17,7 @@ export const Post: React.FC<PostType> = (post) => {
     return formatDistanceToNowStrict(new Date(post.createdAt));
   }, [post.createdAt]);
   const { data: likes, hasLiked, toggleLike } = useLike(post.id);
+
   return (
     <div
       onClick={() => router.push(`/post/${post.id}`)}
@@ -77,7 +78,9 @@ export const Post: React.FC<PostType> = (post) => {
         </div>
         <div className="flex items-center gap-1 text-neutral-400 hover:text-neutral-200 p-1 rounded-sm cursor-pointer">
           <FiMessageSquare className="w-5 h-5 cursor-pointer transition duration-150 ease-in-out" />
-          <p className="text-[12px]">0</p>
+          <p className="text-[12px]">
+            {post && post.comments ? post.comments.length : 0}
+          </p>
         </div>
       </div>
     </div>
