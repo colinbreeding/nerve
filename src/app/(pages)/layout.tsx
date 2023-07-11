@@ -27,7 +27,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.className} -bg-white dark:bg-[#0a0a0a] duration-100 ease-in-out`}
+        className={`${font.className} -bg-white dark:bg-[#0a0a0a] duration-100 ease-in-out scrollbar scrollbar-w-3 scrollbar-thumb-rounded-md scrollbar-thumb-neutral-400/40 dark:scrollbar-thumb-neutral-400/20 scrollbar-track-neutral-700/10 dark:scrollbar-track-neutral-700/20`}
       >
         <ThemeProvider>
           <AuthModalProvider>
