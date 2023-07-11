@@ -66,3 +66,49 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+// Infinite Scroll Endpoint
+// import { z } from "zod";
+// import { prisma } from "../../../../prisma/client";
+// import { NextRequest, NextResponse } from "next/server";
+//
+// export async function GET(req: NextRequest) {
+//   const url = new URL(req.url);
+//
+//   try {
+//     const { limit, page, userId } = z
+//         .object({
+//           limit: z.string(),
+//           page: z.string(),
+//           userId: z.string(),
+//         })
+//         .parse({
+//           limit: url.searchParams.get("limit"),
+//           page: url.searchParams.get("page"),
+//           userId: url.searchParams.get("userId"),
+//         });
+//
+//     const posts = await prisma.post.findMany({
+//       take: parseInt(limit),
+//       skip: (parseInt(page) - 1) * parseInt(limit), // skip should start from 0 for page 1
+//       orderBy: {
+//         createdAt: "desc",
+//       },
+//       include: {
+//         user: true,
+//         comments: true,
+//       },
+//       where: {
+//         userId,
+//       },
+//     });
+//
+//     return NextResponse.json(posts, { status: 200 });
+//   } catch (error) {
+//     console.log(error);
+//     return NextResponse.json(
+//         { error: "Failed to fetch more posts" },
+//         { status: 500 }
+//     );
+//   }
+// }
