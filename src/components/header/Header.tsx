@@ -74,7 +74,7 @@ const Header: React.FC = () => {
   }, [theme]);
 
   return (
-    <div className="sticky top-0 w-full h-14 -bg-white/50 dark:-bg-grey/50 backdrop-blur-[8px] flex justify-center px-4 z-40 border-b-[1px] border-neutral-200 dark:-border-darkGrey shadow-lg">
+    <div className="sticky top-0 w-full h-14 -bg-white/50 dark:-bg-grey/50 backdrop-blur-[8px] flex justify-center select-none px-4 z-40 border-b-[1px] border-neutral-200 dark:-border-darkGrey shadow-lg">
       <div className="w-full h-full max-w-[1000px] flex justify-between items-center">
         <div>
           <Link href="/">
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
             </div>
           )}
           {isNotificationSelected && (
-            <div className="absolute top-10 right-[90px] flex flex-col w-[350px] h-[410px] -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll">
+            <div className="absolute top-10 right-[90px] flex flex-col w-[350px] h-[410px] select-none -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-neutral-400/40 dark:scrollbar-thumb-neutral-400/20 scrollbar-track-neutral-700/10 dark:scrollbar-track-neutral-700/20">
               <NotificationFeed userId={currentUser?.id} />
             </div>
           )}

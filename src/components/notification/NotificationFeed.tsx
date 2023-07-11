@@ -42,10 +42,12 @@ export default function NotificationFeed({ userId }: NotificationFeedProps) {
         return (
           <div
             key={i}
-            className="w-full p-4 flex items-center justify-between gap-2 border-b border-neutral-700"
+            className="w-full p-4 flex items-center justify-between gap-2 border-b border-neutral-200 dark:border-neutral-700"
           >
             <div className="flex gap-2 items-center">
-              <p className="text-[14px] text-neutral-200">{n.body}</p>
+              <p className="text-[14px] text-neutral-900 dark:text-neutral-200">
+                {n.body}
+              </p>
             </div>
             <div>
               <p className="text-[10px] text-neutral-400">
