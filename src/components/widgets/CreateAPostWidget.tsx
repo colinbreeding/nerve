@@ -55,7 +55,7 @@ export default function CreateAPostWidget() {
                   postBody?.length === 300
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] text-black dark:text-white placeholder-neutral-400 scrollbar-none`}
+                } w-full rounded-md p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-black dark:text-white placeholder-neutral-400 scrollbar-none`}
                 placeholder="Whats on your mind?"
                 {...register("body")}
               />
@@ -78,7 +78,7 @@ export default function CreateAPostWidget() {
               <button
                 type="submit"
                 disabled={postBody?.length === 0}
-                className="w-full max-w-[125px] h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
+                className="w-full max-w-[125px] h-[40px] text-[16px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
               >
                 {isLoading ? (
                   <p className="w-full h-full flex justify-center items-center">

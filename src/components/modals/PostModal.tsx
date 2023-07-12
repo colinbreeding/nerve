@@ -75,7 +75,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
                   errors.body
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] text-white placeholder-neutral-400 scrollbar-none`}
+                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-white placeholder-neutral-400 scrollbar-none`}
                 placeholder="Whats on your mind?"
                 {...register("body")}
               />
@@ -91,7 +91,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
               <button
                 type="submit"
                 disabled={post?.length === 0}
-                className="w-full h-[40px] text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60"
+                className="w-full h-[40px] text-[16px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60"
               >
                 {isLoading ? (
                   <p className="w-full h-full flex justify-center items-center">

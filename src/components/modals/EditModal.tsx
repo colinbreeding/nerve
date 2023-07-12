@@ -145,7 +145,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
                   errors.name
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
+                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
                 {...register("name")}
               />
               {errors.name && (
@@ -160,7 +160,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
                   errors.username
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
+                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
                 {...register("username")}
               />
               {errors.username && (
@@ -176,7 +176,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
                   errors.bio
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
+                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] -text-smoothBlack dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400`}
                 {...register("bio")}
               />
               {errors.bio && (
@@ -187,7 +187,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
             </div>
             <button
               type="submit"
-              className="w-full text-[14px] h-[40px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
+              className="w-full text-[16px] h-[40px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
             >
               {isLoading ? (
                 <p className="w-full h-full flex justify-center items-center">
