@@ -18,7 +18,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
           src={user.image ?? "/images/avatar_default.png"}
           width={35}
           height={35}
-          className="rounded-full cursor-pointer"
+          className="rounded-full cursor-pointer max-w-[30px] max-h-[30px]"
           onClick={() => {
             router.push(`/profile/${user.id}`);
           }}

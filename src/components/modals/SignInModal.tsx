@@ -30,19 +30,17 @@ export default function SignInModal({ visible, onClose }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = (data: SignInSchemaType) => {
     setIsLoading(true);
-
     signIn("credentials", {
       ...data,
-      redirect: false,
-    }).then((callback) => {
-      setIsLoading(false);
-      if (callback?.ok) {
+    }).then((res) => {
+      if (res && res.error) {
+        setIsLoading(false);
+        toast.error("Unknown Credentials");
+      } else if (res && res.url) {
+        setIsLoading(false);
         setIsAuthModalOpen(false);
         toast.success("Signed In");
         router.push("/");
-      }
-      if (callback?.error) {
-        toast.error(callback.error);
       }
     });
   };
