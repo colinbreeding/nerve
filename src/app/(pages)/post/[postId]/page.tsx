@@ -28,9 +28,10 @@ const PostView = () => {
             <PostItem {...post} />
           </div>
           <div>
-            {post.comments.map((p: CommentType, i: number) => {
-              return <Comment key={i} {...p} />;
-            })}
+            {post.comments &&
+              post.comments.map((p: CommentType, i: number) => {
+                return <Comment key={i} {...p} />;
+              })}
           </div>
         </div>
         <div className="w-full hidden md:flex justify-end max-w-[360px]">
