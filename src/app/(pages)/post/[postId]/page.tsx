@@ -25,7 +25,7 @@ const PostView = () => {
       <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
         <div className="flex flex-col w-full">
           <div className="w-full space-y-2">
-            <PostItem {...post} />
+            {post && <PostItem {...post} />}
           </div>
           <div>
             {post &&
@@ -37,7 +37,7 @@ const PostView = () => {
         </div>
         <div className="w-full hidden md:flex justify-end max-w-[360px]">
           <div className="w-full flex flex-col gap-4">
-            <FollowWidget />
+            {post && <FollowWidget />}
           </div>
         </div>
       </div>
