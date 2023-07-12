@@ -4,7 +4,6 @@ import toast from "react-hot-toast";
 import { useParams } from "next/navigation";
 import usePosts from "@/hooks/usePosts";
 import { useDropzone } from "react-dropzone";
-import { v4 as uuid } from "uuid";
 import useUsers from "@/hooks/useUsers";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { useForm } from "react-hook-form";
@@ -13,6 +12,7 @@ import { EditSchema, EditSchemaType } from "@/util/validation/EditSchema";
 import Image from "next/image";
 import { BiImageAdd } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
+import { uploadFiles } from "@/util/uploadthing";
 
 interface Props {
   visible: boolean;
@@ -21,7 +21,7 @@ interface Props {
 
 export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
   const { userId } = useParams();
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
   const { data: userDetails, mutate: mutateUser } = useUsers(userId);
   const { mutate: mutatePosts } = usePosts(userId);
@@ -54,16 +54,26 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
   const onSubmit = async ({ bio, username, name }: EditSchemaType) => {
     try {
       setIsLoading(true);
-      const id = uuid();
       if (uploadAvatar) {
-        console.log("uploading image");
+        const imageResult = await uploadFiles({
+          files: [uploadAvatar],
+          endpoint: "imageUploader",
+        });
+        await axios.patch("/api/user", {
+          name,
+          username,
+          bio,
+          id: currentUser?.id,
+          image: imageResult[0].fileUrl,
+        });
+      } else {
+        await axios.patch("/api/user", {
+          name,
+          username,
+          bio,
+          id: currentUser?.id,
+        });
       }
-      await axios.patch("/api/user", {
-        name,
-        username,
-        bio,
-        id: currentUser?.id,
-      });
       toast.success("Profile Updated");
     } catch (error) {
       console.log(error);
@@ -72,6 +82,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
       setIsLoading(false);
       await mutateUser();
       await mutatePosts();
+      await mutateCurrentUser();
       onClose();
     }
   };
