@@ -12,7 +12,7 @@ import { CommentType } from "@/util/types/CommentType";
 const PostView = () => {
   const { postId } = useParams();
   const { data: post, isLoading } = usePost(postId);
-  console.log(post);
+
   if (isLoading)
     return (
       <div className="absolute top-1/3 left-1/2 translate-x-[-50%]">
@@ -25,19 +25,17 @@ const PostView = () => {
       <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
         <div className="flex flex-col w-full">
           <div className="w-full space-y-2">
-            {post && <PostItem {...post} />}
+            <PostItem {...post} />
           </div>
           <div>
-            {post &&
-              post.comments.length > 0 &&
-              post.comments.map((p: CommentType, i: number) => {
-                return <Comment key={i} {...p} />;
-              })}
+            {post.comments.map((p: CommentType, i: number) => {
+              return <Comment key={i} {...p} />;
+            })}
           </div>
         </div>
         <div className="w-full hidden md:flex justify-end max-w-[360px]">
           <div className="w-full flex flex-col gap-4">
-            {post && <FollowWidget />}
+            <FollowWidget />
           </div>
         </div>
       </div>

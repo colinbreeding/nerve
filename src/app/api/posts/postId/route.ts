@@ -3,6 +3,7 @@ import { prisma } from "../../../../../prisma/client";
 
 export async function GET(req: NextRequest) {
   const postId = req.nextUrl.searchParams.get("postId");
+
   if (postId) {
     try {
       const userPost = await prisma.post.findFirst({
