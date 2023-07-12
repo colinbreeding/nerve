@@ -13,6 +13,7 @@ import Image from "next/image";
 import { BiImageAdd } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { uploadFiles } from "@/util/uploadthing";
+import { Spinner } from "@/components/spinner/Spinner";
 
 interface Props {
   visible: boolean;
@@ -186,9 +187,15 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
             </div>
             <button
               type="submit"
-              className="w-full text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
+              className="w-full text-[14px] h-[40px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
             >
-              {isLoading ? "Saving..." : "Save"}
+              {isLoading ? (
+                <p className="w-full h-full flex justify-center items-center">
+                  <Spinner width="w-5" height="h-5" fill="fill-white" />
+                </p>
+              ) : (
+                "Save"
+              )}
             </button>
           </form>
         </div>
