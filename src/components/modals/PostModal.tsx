@@ -8,6 +8,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { PostSchema, PostSchemaType } from "@/util/validation/PostSchema";
 import { AiOutlineClose } from "react-icons/ai";
 import { Spinner } from "@/components/spinner/Spinner";
+import TextareaAutosize from "react-textarea-autosize";
 
 interface Props {
   visible: boolean;
@@ -66,25 +67,31 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
               Create a post
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <textarea
-                rows={4}
+              <TextareaAutosize
+                minRows={4}
                 id="body"
+                maxLength={300}
                 className={`${
                   errors.body
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] text-white placeholder-neutral-400`}
+                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[14px] text-white placeholder-neutral-400 scrollbar-none`}
                 placeholder="Whats on your mind?"
                 {...register("body")}
               />
-              <div className="flex justify-between items-cente mt-1 relative">
-                <p className="absolute bottom-4 right-2 w-full text-xs text-neutral-400 flex justify-end">
-                  {post?.length ?? 0}/300
-                </p>
-              </div>
+              <p
+                className={`w-full flex justify-end text-xs bg-transparent mt-1 ${
+                  post?.length === 300
+                    ? "text-red-500"
+                    : "text-neutral-400 dark:text-neutral-500"
+                }`}
+              >
+                {post?.length ?? 0}/300
+              </p>
               <button
                 type="submit"
-                className="w-full h-[40px] text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out"
+                disabled={post?.length === 0}
+                className="w-full h-[40px] text-[14px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60"
               >
                 {isLoading ? (
                   <p className="w-full h-full flex justify-center items-center">
