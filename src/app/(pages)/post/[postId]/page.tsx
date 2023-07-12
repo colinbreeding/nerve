@@ -12,7 +12,7 @@ import { CommentType } from "@/util/types/CommentType";
 const PostView = () => {
   const { postId } = useParams();
   const { data: post, isLoading } = usePost(postId);
-
+  console.log(post);
   if (isLoading)
     return (
       <div className="absolute top-1/3 left-1/2 translate-x-[-50%]">
