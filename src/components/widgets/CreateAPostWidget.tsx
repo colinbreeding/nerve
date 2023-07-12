@@ -78,7 +78,7 @@ export default function CreateAPostWidget() {
               <button
                 type="submit"
                 disabled={postBody?.length === 0}
-                className="w-full sm:w-32 h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
+                className="w-full max-w-[125px] h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
               >
                 {isLoading ? (
                   <p className="w-full h-full flex justify-center items-center">
