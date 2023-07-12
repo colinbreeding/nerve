@@ -15,7 +15,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
       <div className="flex items-center gap-2">
         <Image
           alt="avatar"
-          src={"/images/avatar_default.png"}
+          src={user.image ?? "/images/avatar_default.png"}
           width={35}
           height={35}
           className="rounded-full cursor-pointer"
