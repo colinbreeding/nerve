@@ -26,17 +26,25 @@ export default function FollowWidget() {
               Who To Follow
             </h1>
           </div>
-          <div className="w-full px-6 flex flex-col gap-3">
-            {currentUser
-              ? filteredUsers &&
-                filteredUsers.slice(0, 3).map((d: any, i: number) => {
-                  return <UserItem key={i} user={d} />;
-                })
-              : users &&
-                users.slice(0, 3).map((d: any, i: number) => {
-                  return <UserItem key={i} user={d} />;
-                })}
-          </div>
+          {filteredUsers.length > 0 ? (
+            <div className="w-full px-6 flex flex-col gap-3">
+              {currentUser
+                ? filteredUsers &&
+                  filteredUsers.slice(0, 3).map((d: any, i: number) => {
+                    return <UserItem key={i} user={d} />;
+                  })
+                : users &&
+                  users.slice(0, 3).map((d: any, i: number) => {
+                    return <UserItem key={i} user={d} />;
+                  })}
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <p className="text-md text-neutral-500 mt-2 mb-20">
+                Your the only user :(
+              </p>
+            </div>
+          )}
         </>
       )}
     </div>
