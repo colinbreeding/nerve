@@ -55,7 +55,7 @@ export default function ProfileWidget() {
                 src={profileDetails.image ?? "/images/avatar_default.png"}
                 width={80}
                 height={80}
-                className="rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg max-w-[80px] max-h-[80px]"
                 priority
               />
               <div className="flex items-center gap-2 mt-2">

@@ -204,7 +204,7 @@ const Header: React.FC = () => {
                   width={30}
                   height={30}
                   quality={100}
-                  className="rounded-full cursor-pointer"
+                  className="rounded-full cursor-pointer max-w-[30px] max-h-[30px]"
                   priority
                 />
                 <TfiAngleDown

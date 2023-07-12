@@ -68,7 +68,7 @@ export const PostItem: React.FC<PostType> = (post) => {
               src={post.user.image ?? "/images/avatar_default.png"}
               height={30}
               width={30}
-              className="rounded-full cursor-pointer"
+              className="rounded-full cursor-pointer max-w-[30px] max-h-[30px]"
             />
           </Link>
           <Link
