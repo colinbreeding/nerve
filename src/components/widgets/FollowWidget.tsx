@@ -26,7 +26,7 @@ export default function FollowWidget() {
               Who To Follow
             </h1>
           </div>
-          {filteredUsers.length > 0 ? (
+          {filteredUsers && filteredUsers.length > 0 ? (
             <div className="w-full px-6 flex flex-col gap-3">
               {currentUser
                 ? filteredUsers &&

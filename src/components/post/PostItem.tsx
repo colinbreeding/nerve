@@ -58,6 +58,7 @@ export const PostItem: React.FC<PostType> = (post) => {
     }
   };
 
+  if (!post || !post.comments) return null;
   return (
     <div className="w-full h-fit p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg">
       <div>
