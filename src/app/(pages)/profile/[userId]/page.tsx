@@ -1,23 +1,31 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Post } from "@/components/post/Post";
 import usePosts from "@/hooks/usePosts";
 import { useParams } from "next/navigation";
 import { Spinner } from "@/components/spinner/Spinner";
-import { PostType } from "@/util/types/PostType";
 import useUsers from "@/hooks/useUsers";
 import ProfileWidget from "@/components/widgets/ProfileWidget";
+import { useIntersection } from "@mantine/hooks";
 
 export default function Profile() {
   const { userId } = useParams();
-  const [posts, setPosts] = useState<PostType[] | null>(null);
-  const { data, isLoading } = usePosts(userId);
+  const { posts, isLoading, size, setSize } = usePosts(userId);
   const { data: user } = useUsers(userId);
+  const lastPostRef = useRef<HTMLElement>(null);
+  const { ref, entry } = useIntersection({
+    root: lastPostRef.current,
+    threshold: 1,
+  });
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
 
   useEffect(() => {
-    setPosts(data);
-  }, [data]);
+    if (entry?.isIntersecting) {
+      setIsLoadingMore(true);
+      setSize(size + 1).then(() => setIsLoadingMore(false)); // Load more posts when the last post comes into view
+    }
+  }, [entry]);
 
   if (isLoading)
     return (
@@ -32,15 +40,28 @@ export default function Profile() {
         <div className="w-full">
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
-              return (
-                <div key={i} className="mb-4">
-                  <Post {...p} />
-                </div>
-              );
+              if (i === posts.length - 1) {
+                return (
+                  <div ref={ref} key={i} className="mb-4">
+                    <Post {...p} />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={i} className="mb-4">
+                    <Post {...p} />
+                  </div>
+                );
+              }
             })
           ) : (
             <div className="flex flex-col items-center mt-24">
               <p className="text-base text-neutral-500">No Posts To Display.</p>
+            </div>
+          )}
+          {isLoadingMore && (
+            <div className="w-full h-10 flex justify-center items-center">
+              <Spinner />
             </div>
           )}
         </div>

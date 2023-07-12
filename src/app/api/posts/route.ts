@@ -3,6 +3,8 @@ import { prisma } from "../../../../prisma/client";
 
 export async function GET(req: NextRequest) {
   const userId = req.nextUrl.searchParams.get("userId");
+  const limit = req.nextUrl.searchParams.get("limit");
+  const page = req.nextUrl.searchParams.get("page");
 
   if (userId) {
     try {
@@ -10,6 +12,8 @@ export async function GET(req: NextRequest) {
         where: {
           userId,
         },
+        take: Number(limit),
+        skip: (Number(page) - 1) * Number(limit),
         include: {
           user: true,
           comments: true,
@@ -33,6 +37,8 @@ export async function GET(req: NextRequest) {
           user: true,
           comments: true,
         },
+        take: Number(limit),
+        skip: (Number(page) - 1) * Number(limit),
         orderBy: {
           createdAt: "desc",
         },

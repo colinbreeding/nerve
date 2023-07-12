@@ -2,22 +2,30 @@
 
 import { Post } from "@/components/post/Post";
 import usePosts from "@/hooks/usePosts";
-import { useEffect, useState } from "react";
-import { PostType } from "@/util/types/PostType";
+import { useEffect, useRef, useState } from "react";
 import { Spinner } from "@/components/spinner/Spinner";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import LoginWidget from "@/components/widgets/LoginWidget";
 import FollowWidget from "@/components/widgets/FollowWidget";
 import CreateAPostWidget from "@/components/widgets/CreateAPostWidget";
+import { useIntersection } from "@mantine/hooks";
 
 export default function Home() {
+  const lastPostRef = useRef<HTMLElement>(null);
+  const { ref, entry } = useIntersection({
+    root: lastPostRef.current,
+    threshold: 1,
+  });
   const { data: currentUser } = useCurrentUser();
-  const [posts, setPosts] = useState<PostType[] | null>(null);
-  const { data, isLoading } = usePosts();
+  const { posts, isLoading, size, setSize } = usePosts();
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
 
   useEffect(() => {
-    setPosts(data);
-  }, [data]);
+    if (entry?.isIntersecting) {
+      setIsLoadingMore(true);
+      setSize(size + 1).then(() => setIsLoadingMore(false)); // Load more posts when the last post comes into view
+    }
+  }, [entry]);
 
   if (isLoading)
     return (
@@ -32,17 +40,30 @@ export default function Home() {
           {currentUser && <CreateAPostWidget />}
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
-              return (
-                <div key={i} className="mb-4">
-                  <Post {...p} />
-                </div>
-              );
+              if (i === posts.length - 1) {
+                return (
+                  <div ref={ref} key={i} className="mb-4">
+                    <Post {...p} />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={i} className="mb-4">
+                    <Post {...p} />
+                  </div>
+                );
+              }
             })
           ) : (
             <div className="flex justify-center">
               <p className="text-md text-neutral-500 mt-24">
                 No posts to display.
               </p>
+            </div>
+          )}
+          {isLoadingMore && (
+            <div className="w-full h-10 flex justify-center items-center">
+              <Spinner />
             </div>
           )}
         </div>

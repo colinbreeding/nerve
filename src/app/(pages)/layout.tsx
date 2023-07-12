@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { ReactNode } from "react";
 import { EditModalProvider } from "@/context/EditModalContext";
 import { PostModalProvider } from "@/context/PostModalContext";
+import QueryProvider from "@/util/providers/QueryProvider";
 
 const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -29,24 +30,26 @@ export default async function RootLayout({
       <body
         className={`${font.className} -bg-white dark:bg-[#0a0a0a] duration-100 ease-in-out scrollbar scrollbar-w-3 scrollbar-thumb-rounded-md scrollbar-thumb-neutral-400/40 dark:scrollbar-thumb-neutral-400/20 scrollbar-track-neutral-700/10 dark:scrollbar-track-neutral-700/20`}
       >
-        <ThemeProvider>
-          <AuthModalProvider>
-            <PostModalProvider>
-              <EditModalProvider>
-                <ClientOnly>
-                  <Header />
-                </ClientOnly>
-                <Toaster
-                  toastOptions={{
-                    className:
-                      "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
-                  }}
-                />
-                {children}
-              </EditModalProvider>
-            </PostModalProvider>
-          </AuthModalProvider>
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider>
+            <AuthModalProvider>
+              <PostModalProvider>
+                <EditModalProvider>
+                  <ClientOnly>
+                    <Header />
+                  </ClientOnly>
+                  <Toaster
+                    toastOptions={{
+                      className:
+                        "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
+                    }}
+                  />
+                  {children}
+                </EditModalProvider>
+              </PostModalProvider>
+            </AuthModalProvider>
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
