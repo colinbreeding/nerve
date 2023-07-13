@@ -43,7 +43,7 @@ export default function NotificationFeed({
   }
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="w-full flex justify-between p-4 shadow-notification">
+      <div className="w-full flex justify-between p-4 border-b border-neutral-700 shadow-lg">
         <p className="text-[18px] text-neutral-900 dark:text-neutral-200 flex items-end">
           Notifications
         </p>
