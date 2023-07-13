@@ -4,22 +4,17 @@ import React, { useMemo } from "react";
 import Image from "next/image";
 import { formatDistanceToNowStrict } from "date-fns";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import useUsers from "@/hooks/useUsers";
 import { CommentType } from "@/util/types/CommentType";
 
 export const Comment: React.FC<CommentType> = (comment) => {
-  const router = useRouter();
   const { data: user } = useUsers(comment.userId);
   const createdAt = useMemo(() => {
     if (!comment.createdAt) return null;
     return formatDistanceToNowStrict(new Date(comment.createdAt));
   }, [comment.createdAt]);
   return (
-    <div
-      onClick={() => router.push(`/post/${comment.id}`)}
-      className="w-full h-fit my-4 p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer"
-    >
+    <div className="w-full h-fit my-4 p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer">
       <div className="flex items-center gap-2">
         <Link
           href={`/profile/${comment.userId}`}
