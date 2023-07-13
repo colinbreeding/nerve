@@ -9,11 +9,13 @@ import { UserType } from "@/util/types/UserType";
 import { EditModalContext } from "@/context/EditModalContext";
 import useFollow from "@/hooks/useFollow";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { AuthModalContext } from "@/context/AuthModalContext";
 
 export default function ProfileWidget() {
   const { data: currentUser } = useCurrentUser();
   const { userId } = useParams();
   const { data, isLoading } = useUsers(userId);
+  const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const { setIsEditModalOpen } = useContext(EditModalContext);
   const [profileDetails, setProfileDetails] = useState<UserType | undefined>();
   const { data: followers, isFollowing, toggleFollow } = useFollow(userId);
@@ -22,6 +24,14 @@ export default function ProfileWidget() {
     if (!data) return;
     setProfileDetails(data);
   }, [data]);
+
+  const handleFollow = () => {
+    if (!currentUser) {
+      setIsAuthModalOpen(true);
+    } else {
+      toggleFollow();
+    }
+  };
 
   if (!profileDetails) return;
   return (
@@ -44,7 +54,7 @@ export default function ProfileWidget() {
                 </button>
               ) : (
                 <button
-                  onClick={toggleFollow}
+                  onClick={handleFollow}
                   className="w-fit text-xs text-white dark:text-neutral-900 absolute top-[25px] right-0 bg-neutral-800 dark:bg-neutral-400 hover:bg-neutral-700 hover:dark:bg-neutral-500 rounded-full px-4 py-1 transition duration-150 ease-in-out"
                 >
                   {isFollowing ? "Unfollow" : "Follow"}
