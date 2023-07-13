@@ -18,14 +18,14 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
           src={user.image ?? "/images/avatar_default.png"}
           width={35}
           height={35}
-          className="rounded-full cursor-pointer max-w-[30px] max-h-[30px]"
+          className="rounded-full cursor-pointer max-w-[35px] max-h-[35px]"
           onClick={() => {
             router.push(`/profile/${user.id}`);
           }}
         />
         <div className="flex flex-col justify-center mt-1 gap-[1px]">
           <p
-            className="text-base text-smoothBlack dark:text-white leading-4 hover:underline cursor-pointer"
+            className="text-[14px] text-smoothBlack dark:text-white leading-4 hover:underline cursor-pointer"
             onClick={() => {
               router.push(`/profile/${user.id}`);
             }}
