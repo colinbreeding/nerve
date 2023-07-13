@@ -119,7 +119,7 @@ const Header: React.FC = () => {
           {isThemeSelected && (
             <div
               className={`${
-                currentUser ? "right-[124px]" : "right-[64px]"
+                currentUser ? "right-[124px]" : "right-[90px]"
               } absolute top-10 px-1 flex flex-col w-[150px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md py-1 drop-shadow-md`}
             >
               {themeOptions?.map((o, i) => {
