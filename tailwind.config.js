@@ -28,6 +28,10 @@ module.exports = {
       fontFamily: {
         rubik: ["Rubik", "sans-serif"],
       },
+      boxShadow: {
+        notification:
+          "rgba(0, 0, 0, 0.10) 0px 10px 20px, rgba(0, 0, 0, 0.15) 0px 6px 6px;",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")({ nocompatible: true })],

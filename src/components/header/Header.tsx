@@ -74,8 +74,12 @@ const Header: React.FC = () => {
   }, [theme]);
 
   return (
-    <div className="sticky top-0 w-full h-14 -bg-white/50 dark:-bg-grey/50 backdrop-blur-[8px] flex justify-center select-none px-4 z-40 border-b-[1px] border-neutral-200 dark:-border-darkGrey shadow-lg">
-      <div className="w-full h-full max-w-[1000px] flex justify-between items-center">
+    <div
+      className={`${
+        isNotificationSelected ? "px-0" : "px-4"
+      } sticky top-0 w-full h-14 -bg-white/50 dark:-bg-grey/50 backdrop-blur-[8px] flex justify-center select-none z-40 border-b-[1px] border-neutral-200 dark:-border-darkGrey shadow-lg`}
+    >
+      <div className="w-full h-full max-w-[1000px] flex justify-between items-center relative">
         <div>
           <Link href="/">
             <div className="flex items-center gap-1 group">
@@ -183,11 +187,6 @@ const Header: React.FC = () => {
               />
             </div>
           )}
-          {isNotificationSelected && (
-            <div className="absolute top-10 right-0 w-[288px] sm:w-[350px] h-[450px] flex flex-col select-none -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md overflow-scroll scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-neutral-400/40 dark:scrollbar-thumb-neutral-400/20 scrollbar-track-neutral-700/10 dark:scrollbar-track-neutral-700/20">
-              <NotificationFeed userId={currentUser?.id} />
-            </div>
-          )}
           {currentUser ? (
             <div>
               <div
@@ -286,6 +285,14 @@ const Header: React.FC = () => {
             </div>
           )}
         </div>
+        {isNotificationSelected && (
+          <div className="absolute top-0 sm:top-12 right-0 sm:right-[90px] w-full sm:w-[350px] h-screen sm:h-[470px] flex flex-col select-none -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-none sm:rounded-md drop-shadow-md ">
+            <NotificationFeed
+              userId={currentUser?.id}
+              setIsNotificationSelected={() => setIsNotificationSelected(false)}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
