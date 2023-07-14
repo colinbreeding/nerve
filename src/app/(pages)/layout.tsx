@@ -9,6 +9,7 @@ import { ReactNode } from "react";
 import { EditModalProvider } from "@/context/EditModalContext";
 import { PostModalProvider } from "@/context/PostModalContext";
 import QueryProvider from "@/util/providers/QueryProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const font = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -45,6 +46,7 @@ export default async function RootLayout({
                     }}
                   />
                   {children}
+                  <Analytics />
                 </EditModalProvider>
               </PostModalProvider>
             </AuthModalProvider>
