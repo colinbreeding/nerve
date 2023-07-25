@@ -213,7 +213,7 @@ const Header: React.FC = () => {
                 />
               </div>
               {isProfileSelected && (
-                <div className="absolute top-10 -left-[74px] flex flex-col w-[220px] h-[160px] min-h-[158px] -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
+                <div className="absolute top-10 -left-[74px] flex flex-col w-[220px] h-fit -bg-white dark:-bg-smoothBlack border -border-lightGrey/20 dark:-border-darkGrey rounded-md drop-shadow-md select-none overflow-ellipsis">
                   <div className="w-full h-full py-2 px-4">
                     <p className="text-neutral-800 dark:text-neutral-200">
                       {currentUser.name}
@@ -222,10 +222,9 @@ const Header: React.FC = () => {
                       {currentUser.email}
                     </p>
                   </div>
-                  <div className="h-[1px] bg-neutral-200 dark:bg-neutral-700" />
-                  <div className="p-1">
+                  <div className="border-t-[1px] -border-lightGrey/20 dark:-border-darkGrey">
                     <div
-                      className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:dark:text-neutral-200 rounded-md"
+                      className="w-full h-fit flex items-center gap-2 p-3 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:dark:text-neutral-200 rounded-md"
                       onClick={() => {
                         router.push(`/profile/${currentUser.id}`);
                         setIsProfileSelected(false);
@@ -244,10 +243,9 @@ const Header: React.FC = () => {
                       <p className="text-[16px]">Profile</p>
                     </div>
                   </div>
-                  <div className="h-[1px] bg-neutral-200 dark:bg-neutral-700" />
-                  <div className="p-1">
+                  <div className="border-t-[1px] -border-lightGrey/20 dark:-border-darkGrey">
                     <div
-                      className="w-full h-fit flex items-center gap-2 p-2 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
+                      className="w-full h-fit flex items-center gap-2 p-3 cursor-pointer hover:bg-neutral-200 hover:dark:bg-neutral-800 -text-darkGrey hover:text-red-500 rounded-md"
                       onClick={() => {
                         setIsProfileSelected(false);
                         setIsThemeSelected(false);
