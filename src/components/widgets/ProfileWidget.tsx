@@ -35,7 +35,7 @@ export default function ProfileWidget() {
 
   if (!profileDetails) return;
   return (
-    <div className="w-full max-w-full h-fit -bg-white dark:-bg-grey/50 sticky top-[72px] flex flex-col justify-center items-center rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700">
+    <div className="w-full max-w-full h-fit -bg-white dark:-bg-grey/50 sticky top-[72px] flex flex-col justify-center items-center md:rounded-lg shadow-lg md:border border-neutral-200 dark:border-neutral-700">
       {isLoading ? (
         <div className="w-full min-h-[332px] flex justify-center items-center">
           <Spinner />

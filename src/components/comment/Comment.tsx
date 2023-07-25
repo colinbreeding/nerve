@@ -14,7 +14,7 @@ export const Comment: React.FC<CommentType> = (comment) => {
     return formatDistanceToNowStrict(new Date(comment.createdAt));
   }, [comment.createdAt]);
   return (
-    <div className="w-full h-fit my-4 p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer">
+    <div className="w-full h-fit my-2 md:my-4 p-4 bg-white dark:-bg-grey/50 md:rounded-lg md:border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer">
       <div className="flex items-center gap-2">
         <Link
           href={`/profile/${comment.userId}`}

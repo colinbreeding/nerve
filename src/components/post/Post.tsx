@@ -21,7 +21,7 @@ export const Post: React.FC<PostType> = (post) => {
   return (
     <div
       onClick={() => router.push(`/post/${post.id}`)}
-      className="w-full h-fit p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer"
+      className="w-full h-fit p-4 bg-white dark:-bg-grey/50 md:rounded-lg md:border border-neutral-200 dark:-border-darkGrey shadow-lg cursor-pointer"
     >
       <div className="flex items-center gap-2">
         <Link

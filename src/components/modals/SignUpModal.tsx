@@ -70,7 +70,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
           <div className="flex gap-2">
             <button
               onClick={() => signIn("google")}
-              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-md bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
+              className="flex items-center justify-center gap-1 w-full h-10 font-medium rounded-full bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 hover:dark:bg-neutral-600 -text-smoothBlack dark:text-white text-[14px] transition duration-150 ease-in-out"
             >
               <FcGoogle className="w-5 h-5 mb-[1px] mr-[3px]" />
               Sign In With Google
@@ -90,7 +90,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-lg h-10 py-2 px-4 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("email")}
               />
               {errors.email && (
@@ -103,7 +103,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
               <input
                 type="text"
                 placeholder="Name"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-lg h-10 py-2 px-4 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("name")}
               />
               {errors.name && (
@@ -116,7 +116,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
               <input
                 type="text"
                 placeholder="Username"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-lg h-10 py-2 px-4 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("username")}
               />
               {errors.username && (
@@ -129,7 +129,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
               <input
                 type="password"
                 placeholder="Password"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-lg h-10 py-2 px-4 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("password")}
               />
               {errors.password && (
@@ -142,7 +142,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
               <input
                 type="password"
                 placeholder="Confirm Password"
-                className="rounded-md h-10 p-2 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-600 border-none focus:-outline-steelBlue text-[14px]"
+                className="rounded-lg h-10 py-2 px-4 -text-smoothBlack dark:text-white bg-neutral-300 dark:bg-neutral-700 border-none focus:-outline-steelBlue text-[14px]"
                 {...register("confirmPassword")}
               />
               {errors.confirmPassword && (
@@ -153,7 +153,7 @@ export default function SignUpModal({ visible, onClose }: Props) {
             </div>
             <button
               type="submit"
-              className="h-10 rounded-md -bg-steelBlue hover:-bg-pictonBlue text-white text-[14px] transition duration-150 ease-in-out"
+              className="h-10 rounded-full -bg-steelBlue hover:-bg-pictonBlue text-white text-[14px] transition duration-150 ease-in-out"
             >
               Sign Up
             </button>

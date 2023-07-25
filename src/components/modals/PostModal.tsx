@@ -54,7 +54,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
         visible ? "fixed" : "hidden"
       } w-screen h-screen bg-black/50 top-0 left-0 overflow-hidden flex justify-center items-center px-0 sm:px-4 z-50`}
     >
-      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-grey flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard border border-neutral-200 dark:border-neutral-700">
+      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-smoothBlack flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard md:border border-neutral-200 dark:border-neutral-700">
         <div className="w-full h-full py-8 px-6 flex flex-col gap-4 relative">
           <div>
             <p
@@ -75,7 +75,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
                   errors.body
                     ? "border border-red-500 focus:outline-red-500"
                     : "focus:-outline-steelBlue"
-                } w-full rounded-md mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-white placeholder-neutral-400 scrollbar-none`}
+                } w-full rounded-lg mt-4 p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-white placeholder-neutral-400 scrollbar-none`}
                 placeholder="Whats on your mind?"
                 {...register("body")}
               />
@@ -91,7 +91,7 @@ export const PostModal: React.FC<Props> = ({ visible, onClose }) => {
               <button
                 type="submit"
                 disabled={post?.length === 0}
-                className="w-full h-[40px] text-[16px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60"
+                className="w-full h-[40px] text-[16px] mt-2 py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-full text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60"
               >
                 {isLoading ? (
                   <p className="w-full h-full flex justify-center items-center">

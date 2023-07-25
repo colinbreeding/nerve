@@ -21,8 +21,8 @@ const PostView = () => {
     );
 
   return (
-    <div className="w-full h-full flex justify-center px-4 pb-4">
-      <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
+    <div className="w-full h-full flex justify-center md:px-4 md:pb-4">
+      <div className="w-full max-w-[1000px] md:mt-4 flex justify-between gap-4">
         <div className="flex flex-col w-full">
           <div className="w-full space-y-2">
             <PostItem {...post} />

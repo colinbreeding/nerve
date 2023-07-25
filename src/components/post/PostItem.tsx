@@ -60,7 +60,7 @@ export const PostItem: React.FC<PostType> = (post) => {
 
   if (!post || !post.comments) return null;
   return (
-    <div className="w-full h-fit p-4 bg-white dark:-bg-grey/50 rounded-lg border border-neutral-200 dark:-border-darkGrey shadow-lg">
+    <div className="w-full h-fit p-4 bg-white dark:-bg-grey/50 md:rounded-lg md:border border-neutral-200 dark:-border-darkGrey shadow-lg">
       <div>
         <div className="flex items-center gap-2">
           <Link href={`/profile/${post.userId}`}>
@@ -124,7 +124,7 @@ export const PostItem: React.FC<PostType> = (post) => {
                 comment?.length === 300
                   ? "border border-red-500 focus:outline-red-500"
                   : "focus:-outline-steelBlue"
-              } w-full rounded-md p-2 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-black dark:text-white placeholder-neutral-400 scrollbar-none`}
+              } w-full rounded-lg py-2 px-4 bg-neutral-200 dark:-bg-darkGrey text-[16px] text-black dark:text-white placeholder-neutral-400 scrollbar-none`}
               placeholder="Write a comment"
               {...register("body")}
             />
@@ -147,7 +147,7 @@ export const PostItem: React.FC<PostType> = (post) => {
             <button
               type="submit"
               disabled={comment?.length === 0}
-              className="w-full max-w-[125px] sm:w-32 h-[40px] text-[16px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-md text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
+              className="w-full max-w-[112px] sm:w-28 h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-full text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
             >
               {isLoading ? (
                 <p className="w-full h-full flex justify-center items-center">

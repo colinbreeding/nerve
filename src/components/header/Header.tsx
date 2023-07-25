@@ -286,7 +286,7 @@ const Header: React.FC = () => {
           )}
         </div>
         {isNotificationSelected && (
-          <div className="absolute top-0 sm:top-12 right-0 sm:right-[90px] w-full sm:w-[350px] h-screen sm:h-[470px] flex flex-col select-none -bg-white dark:bg-neutral-900 border -border-lightGrey/20 dark:-border-darkGrey rounded-none sm:rounded-md drop-shadow-md ">
+          <div className="absolute top-0 sm:top-12 right-0 sm:right-[90px] w-full sm:w-[350px] h-screen sm:h-[470px] flex flex-col select-none -bg-white dark:bg-neutral-900 md:border -border-lightGrey/20 dark:-border-darkGrey rounded-none sm:rounded-md drop-shadow-md ">
             <NotificationFeed
               userId={currentUser?.id}
               setIsNotificationSelected={() => setIsNotificationSelected(false)}

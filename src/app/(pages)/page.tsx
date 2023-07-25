@@ -34,21 +34,21 @@ export default function Home() {
       </div>
     );
   return (
-    <div className="w-full h-full flex justify-center px-4 pb-4">
-      <div className="w-full max-w-[1000px] mt-4 flex justify-between gap-4">
+    <div className="w-full h-full flex justify-center md:px-4 md:pb-4">
+      <div className="w-full max-w-[1000px] md:mt-4 flex justify-between gap-4">
         <div className="w-full">
           {currentUser && <CreateAPostWidget />}
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
               if (i === posts.length - 1) {
                 return (
-                  <div ref={ref} key={i} className="mb-4">
+                  <div ref={ref} key={i} className="mb-2 md:mb-4">
                     <Post {...p} />
                   </div>
                 );
               } else {
                 return (
-                  <div key={i} className="mb-4">
+                  <div key={i} className="mb-2 md:mb-4">
                     <Post {...p} />
                   </div>
                 );

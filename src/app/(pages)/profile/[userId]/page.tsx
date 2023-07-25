@@ -35,20 +35,20 @@ export default function Profile() {
     );
 
   return (
-    <div className="w-full flex justify-center px-4">
-      <div className="w-full max-w-[1000px] flex flex-col-reverse md:flex-row justify-between mt-4 gap-4">
+    <div className="w-full flex justify-center md:px-4">
+      <div className="w-full max-w-[1000px] flex flex-col-reverse md:flex-row justify-between md:mt-4 gap-2 md:gap-4">
         <div className="w-full">
           {posts && posts.length > 0 ? (
             posts.map((p, i) => {
               if (i === posts.length - 1) {
                 return (
-                  <div ref={ref} key={i} className="mb-4">
+                  <div ref={ref} key={i} className="mb-2 md:mb-4">
                     <Post {...p} />
                   </div>
                 );
               } else {
                 return (
-                  <div key={i} className="mb-4">
+                  <div key={i} className="mb-2 md:mb-4">
                     <Post {...p} />
                   </div>
                 );
