@@ -51,7 +51,7 @@ export default function SignInModal({ visible, onClose }: Props) {
         visible ? "fixed" : "hidden"
       } w-screen h-screen bg-black/50 top-0 left-0 overflow-hidden flex justify-center items-center px-0 sm:px-4 z-50`}
     >
-      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-smoothBlack flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard border border-neutral-200 dark:border-neutral-700">
+      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-smoothBlack flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard md:border border-neutral-200 dark:border-neutral-700">
         <div className="w-full h-full p-8 flex flex-col gap-4 relative">
           <p
             className="absolute top-6 right-6 text-[14px] text-neutral-500 hover:bg-neutral-200 hover:dark:bg-neutral-700 p-1 rounded-md cursor-pointer transition duration-150 ease-in-out"
