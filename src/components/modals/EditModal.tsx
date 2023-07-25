@@ -102,7 +102,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
         visible ? "fixed" : "hidden"
       } w-screen h-screen bg-black/50 top-0 left-0 overflow-hidden flex justify-center items-center px-0 sm:px-4 z-50`}
     >
-      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-grey flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard border border-neutral-200 dark:border-neutral-700">
+      <div className="w-full sm:max-w-[400px] h-full sm:h-fit -bg-white dark:-bg-smoothBlack flex flex-col justify-center items-center rounded-none sm:rounded-lg shadow-authCard md:border border-neutral-200 dark:border-neutral-700">
         <div className="w-full h-full py-8 px-6 flex flex-col gap-4 relative">
           <div>
             <p
