@@ -1,7 +1,7 @@
 import "../../styles/globals.css";
 import { Inter } from "next/font/google";
 import Header from "@/components/header/Header";
-import ClientOnly from "@/util/ClientOnly";
+import ClientOnlyProvider from "@/util/providers/ClientOnlyProvider";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthModalProvider } from "@/context/AuthModalContext";
 import { Toaster } from "react-hot-toast";
@@ -36,9 +36,9 @@ export default async function RootLayout({
             <AuthModalProvider>
               <PostModalProvider>
                 <EditModalProvider>
-                  <ClientOnly>
+                  <ClientOnlyProvider>
                     <Header />
-                  </ClientOnly>
+                  </ClientOnlyProvider>
                   <Toaster
                     toastOptions={{
                       className:
