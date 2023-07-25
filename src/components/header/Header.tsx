@@ -91,7 +91,7 @@ const Header: React.FC = () => {
               >
                 <AiFillAliwangwang />
               </IconContext.Provider>
-              <h1 className="text-[20px] font-rubik font-medium -text-smoothBlack dark:-text-white">
+              <h1 className="hidden sm:block text-[20px] font-rubik font-medium -text-smoothBlack dark:-text-white">
                 Nerve
               </h1>
             </div>
