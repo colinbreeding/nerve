@@ -20,7 +20,7 @@ export default function LoginWidget() {
           <button
             type="button"
             onClick={() => setIsAuthModalOpen(true)}
-            className="w-full text-[14px] py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-md mt-2 text-white transition duration-150 ease-in-out"
+            className="w-full text-[14px] py-2 -bg-steelBlue hover:-bg-pictonBlue rounded-full mt-2 text-white transition duration-150 ease-in-out"
           >
             Sign In
           </button>
@@ -30,7 +30,7 @@ export default function LoginWidget() {
               setIsAuthModalOpen(true);
               setIsSignUp(true);
             }}
-            className="w-full text-[14px] mb-1 py-2 bg-white dark:-bg-grey/50 hover:bg-neutral-200 hover:dark:-bg-darkGrey border border-neutral-600 rounded-md mt-2 -text-smoothBlack dark:text-white transition duration-150 ease-in-out"
+            className="w-full text-[14px] mb-1 py-2 bg-white dark:-bg-grey/50 hover:bg-neutral-200 hover:dark:-bg-darkGrey border border-neutral-600 rounded-full mt-2 -text-smoothBlack dark:text-white transition duration-150 ease-in-out"
           >
             Create a Account
           </button>

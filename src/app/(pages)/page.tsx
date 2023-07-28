@@ -42,13 +42,13 @@ export default function Home() {
             posts.map((p, i) => {
               if (i === posts.length - 1) {
                 return (
-                  <div ref={ref} key={i} className="mb-2 md:mb-4">
+                  <div ref={ref} key={i} className="mb-1 md:mb-4">
                     <Post {...p} />
                   </div>
                 );
               } else {
                 return (
-                  <div key={i} className="mb-2 md:mb-4">
+                  <div key={i} className="mb-1 md:mb-4">
                     <Post {...p} />
                   </div>
                 );

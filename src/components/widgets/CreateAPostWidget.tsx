@@ -42,7 +42,7 @@ export default function CreateAPostWidget() {
   };
 
   return (
-    <div className="w-full max-w-full h-fit -bg-white dark:-bg-grey/50 flex flex-col justify-center items-center md:rounded-lg shadow-lg md:border border-neutral-200 dark:border-neutral-700 mb-2 md:mb-4">
+    <div className="w-full max-w-full h-fit -bg-white dark:-bg-grey/50 flex flex-col justify-center items-center md:rounded-lg shadow-lg md:border border-neutral-200 dark:border-neutral-700 mb-1 md:mb-4">
       <div className="w-full h-full p-5 flex flex-col gap-4 relative">
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>

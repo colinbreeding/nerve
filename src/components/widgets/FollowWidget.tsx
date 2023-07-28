@@ -38,13 +38,7 @@ export default function FollowWidget() {
                     return <UserItem key={i} user={d} />;
                   })}
             </div>
-          ) : (
-            <div className="flex justify-center">
-              <p className="text-md text-neutral-500 mt-2 mb-20">
-                Your the only user :(
-              </p>
-            </div>
-          )}
+          ) : null}
         </>
       )}
     </div>
