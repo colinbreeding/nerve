@@ -8,10 +8,13 @@ import FollowWidget from "@/components/widgets/FollowWidget";
 import usePost from "@/hooks/usePost";
 import { Comment } from "@/components/comment/Comment";
 import { CommentType } from "@/util/types/CommentType";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import LoginWidget from "@/components/widgets/LoginWidget";
 
 const PostView = () => {
   const { postId } = useParams();
   const { data: post, isLoading } = usePost(postId);
+  const { data: currentUser } = useCurrentUser();
 
   if (isLoading)
     return (
@@ -35,7 +38,7 @@ const PostView = () => {
         </div>
         <div className="w-full hidden md:flex justify-end max-w-[360px]">
           <div className="w-full flex flex-col gap-4">
-            <FollowWidget />
+            {currentUser ? <FollowWidget /> : <LoginWidget />}
           </div>
         </div>
       </div>
