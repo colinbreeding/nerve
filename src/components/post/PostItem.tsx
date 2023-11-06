@@ -37,7 +37,7 @@ export const PostItem: React.FC<PostType> = (post) => {
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const { data: likes, hasLiked, toggleLike } = useLike(post.id);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  console.log(comment);
   const onSubmit = async ({ body }: CommentSchemaType) => {
     if (!currentUser) return setIsAuthModalOpen(true);
     try {
@@ -146,7 +146,7 @@ export const PostItem: React.FC<PostType> = (post) => {
             </p>
             <button
               type="submit"
-              disabled={comment?.length === 0}
+              disabled={!comment || comment?.length === 0}
               className="w-full max-w-[112px] sm:w-28 h-[40px] text-[14px] py-2 px-10 -bg-steelBlue border -border-pictonBlue hover:-bg-pictonBlue rounded-full text-white transition duration-150 ease-in-out disabled:hover:-bg-steelBlue disabled:opacity-60 flex justify-center items-center"
             >
               {isLoading ? (
