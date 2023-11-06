@@ -176,7 +176,7 @@ export const PostItem: React.FC<PostType> = (post) => {
           </div>
         </form>
       </div>
-      {canDelete && (
+      {currentUser && canDelete && (
         <div
           onClick={(e) => {
             e.stopPropagation();
