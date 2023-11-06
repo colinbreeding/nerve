@@ -7,7 +7,6 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
-import { EditModal } from "@/components/modals/EditModal";
 import { DeleteModal } from "@/components/modals/DeleteModal";
 
 type Props = {

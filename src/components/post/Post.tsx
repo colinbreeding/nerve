@@ -1,20 +1,14 @@
 "use client";
 
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
-import {
-  AiFillHeart,
-  AiOutlineHeart,
-  AiFillDelete,
-  AiOutlineDelete,
-} from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { formatDistanceToNowStrict } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PostType } from "@/util/types/PostType";
 import useLike from "@/hooks/useLike";
-import { DeleteModalContext } from "@/context/DeleteModalContext";
 
 export const Post: React.FC<PostType> = (post) => {
   const router = useRouter();
