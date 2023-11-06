@@ -1,7 +1,12 @@
 "use client";
 
-import React, { useContext, useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  AiFillDelete,
+  AiFillHeart,
+  AiOutlineDelete,
+  AiOutlineHeart,
+} from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +25,8 @@ import usePost from "@/hooks/usePost";
 import { AuthModalContext } from "@/context/AuthModalContext";
 import { Spinner } from "@/components/spinner/Spinner";
 import TextareaAutosize from "react-textarea-autosize";
+import { DeleteModalContext } from "@/context/DeleteModalContext";
+import usePosts from "@/hooks/usePosts";
 
 export const PostItem: React.FC<PostType> = (post) => {
   const {
@@ -37,7 +44,10 @@ export const PostItem: React.FC<PostType> = (post) => {
   const { setIsAuthModalOpen } = useContext(AuthModalContext);
   const { data: likes, hasLiked, toggleLike } = useLike(post.id);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  console.log(comment);
+  const { setIsDeleteModalOpen } = useContext(DeleteModalContext);
+  const { posts: userPosts } = usePosts(currentUser?.id);
+  const [canDelete, setCanDelete] = useState<boolean>(false);
+
   const onSubmit = async ({ body }: CommentSchemaType) => {
     if (!currentUser) return setIsAuthModalOpen(true);
     try {
@@ -58,9 +68,15 @@ export const PostItem: React.FC<PostType> = (post) => {
     }
   };
 
+  useEffect(() => {
+    if (!userPosts) return;
+    const result = userPosts.filter((p) => p.id === post.id);
+    result.length > 0 && setCanDelete(true);
+  }, [userPosts]);
+
   if (!post || !post.comments) return null;
   return (
-    <div className="w-full h-fit p-4 bg-white dark:-bg-grey/50 md:rounded-lg md:border border-neutral-200 dark:-border-darkGrey shadow-lg">
+    <div className="w-full h-fit p-4 bg-white dark:-bg-grey/50 md:rounded-lg md:border border-neutral-200 dark:-border-darkGrey shadow-lg relative">
       <div>
         <div className="flex items-center gap-2">
           <Link href={`/profile/${post.userId}`}>
@@ -160,6 +176,18 @@ export const PostItem: React.FC<PostType> = (post) => {
           </div>
         </form>
       </div>
+      {canDelete && (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsDeleteModalOpen(true);
+          }}
+          className="absolute top-5 right-5 flex items-center gap-1 p-1 w-[21px] h-[21px] rounded-sm cursor-pointer group"
+        >
+          <AiFillDelete className="absolute hidden group-hover:block w-[21px] h-[21px] cursor-pointer text-red-500" />
+          <AiOutlineDelete className="absolute block group-hover:hidden w-[21px] h-[21px] cursor-pointer text-neutral-400" />
+        </div>
+      )}
     </div>
   );
 };

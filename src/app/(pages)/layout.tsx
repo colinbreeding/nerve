@@ -10,6 +10,7 @@ import { EditModalProvider } from "@/context/EditModalContext";
 import { PostModalProvider } from "@/context/PostModalContext";
 import QueryProvider from "@/util/providers/QueryProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { DeleteModalProvider } from "@/context/DeleteModalContext";
 
 const font = Inter({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -35,19 +36,21 @@ export default async function RootLayout({
           <ThemeProvider>
             <AuthModalProvider>
               <PostModalProvider>
-                <EditModalProvider>
-                  <ClientOnlyProvider>
-                    <Header />
-                  </ClientOnlyProvider>
-                  <Toaster
-                    toastOptions={{
-                      className:
-                        "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
-                    }}
-                  />
-                  {children}
-                  <Analytics />
-                </EditModalProvider>
+                <DeleteModalProvider>
+                  <EditModalProvider>
+                    <ClientOnlyProvider>
+                      <Header />
+                    </ClientOnlyProvider>
+                    <Toaster
+                      toastOptions={{
+                        className:
+                          "bg-neutral-200 dark:bg-neutral-700 dark:text-white text-[12px]",
+                      }}
+                    />
+                    {children}
+                    <Analytics />
+                  </EditModalProvider>
+                </DeleteModalProvider>
               </PostModalProvider>
             </AuthModalProvider>
           </ThemeProvider>
